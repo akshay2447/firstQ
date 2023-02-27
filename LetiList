@@ -1,0 +1,836 @@
+<script type="text/javascript">
+    // Common functions
+
+    function getQueryString() {
+          var key = false, res = {}, itm = null;
+          // get the query string without the ?
+          var qs = location.search.substring(1);
+          // check for the key as an argument
+          if (arguments.length > 0 && arguments[0].length > 1)
+            key = arguments[0];
+          // make a regex pattern to grab key/value
+          var pattern = /([^&=]+)=([^&]*)/g;
+          // loop the items in the query string, either
+          // find a match to the argument, or build an object
+          // with key/value pairs
+          while (itm = pattern.exec(qs)) {
+            if (key !== false && decodeURIComponent(itm[1]) === key)
+              return decodeURIComponent(itm[2]);
+            else if (key === false)
+              res[decodeURIComponent(itm[1])] = decodeURIComponent(itm[2]);
+          }
+
+          return key === false ? res : null;
+    }
+
+    function getvalue(id) {
+        var ele = $("#"+id);
+        var type = ele[0].nodeName.toLowerCase();
+        switch (type) {
+            case "input":
+                return ele.val();
+                break;
+            case "textarea":
+                return ele.val();
+                break;
+            case "select":
+                return $(":selected", ele).val()
+                break;
+        }
+    }
+
+    function setvalue(id, val) {
+        var ele = $("#"+id);
+        var type = ele[0].nodeName.toLowerCase();
+        switch (type) {
+            case "input":
+                ele.val(val);
+                break;
+            case "textarea":
+                ele.val(val);
+                break;                
+            case "select":
+                ele.val(val)
+                break;
+            case "label":
+                ele.html(val);
+                break;                
+        }
+    }
+
+    
+    function loadselect(ele, data) {
+
+        $.each(data, function (index, data) {
+
+            var opt = $("<option value='"+data.value+"'>"+data.text+"</option>");
+            ele.append(opt);
+        });
+    }
+
+    function logError(xhr, status, error){
+        console.log("xhr", xhr, "status", status, "error", error)
+    }
+
+    
+    function GetAjax(url, success, error) {
+        $.ajax({
+            url: url,
+            type: "GET",
+            headers: {
+                "Accept": "application/json;odata=verbose",
+                "Content-Type": "application/json;odata=verbose",
+                "X-RequestDigest": $("#_REQUESTDIGEST").val(),
+            },
+            success: success,
+            error: error,
+        });
+    }
+
+
+    function getData(id) {
+        return new Promise(function(resolve, reject) {
+            GetAjax("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/Web/Lists/GetByTitle('"+id+"')/items?$select=Id,Title",
+                function(data) { resolve(data); },
+                function(jqXHR, textStatus, errorThrown) { reject(textStatus); }
+            );
+        })
+    }
+
+    function getDataUrl(Url) {
+        return new Promise(function(resolve, reject) {
+            GetAjax(Url,
+                function(data) { resolve(data); },
+                function(jqXHR, textStatus, errorThrown) { reject(textStatus); }
+            );
+        })
+    }
+
+
+
+
+</script>    
+
+<script type="text/javascript">
+
+    // redirect to list Process automation list if query parameter id1 is not present
+    if (new URI(window.location.href).getQueryParameter("id1")) {
+    } else {
+        window.location.href = "https://ishareteam2.na.xom.com/sites/UnconBTC/UnconBTC/DW/SitePages/Process%20Automation%20List.aspx";
+    }
+    queryParam = getQueryString();
+    var itemid = queryParam.id1;
+    $("#pageTitle").hide();
+
+</script>    
+
+<script type="text/javascript">
+// Load From Data
+
+var Design_Ex2Id  =  null;
+    function getformdataDesign_Ex2(metadata, submit) {
+
+        var data = {};
+        data.__metadata = metadata;
+        data.Approver2EmailId = selectedAutoSelect.A2email;
+        data.Approver3EmailId = selectedAutoSelect.A3email;
+        data.Reviewer2EmailId = selectedAutoSelect.R2email;
+        data.Reviewer3EmailId = selectedAutoSelect.R3email;
+        data.Reviewer1EmailId  = MContact2Id;
+        data.Approver1EmailId = MManagerId;
+        data.Title = getvalue("unique");
+        data.WorkMigrationEngineerEmailId = parseInt(getvalue("btc"));
+        if(submit == true)
+        {
+            data.WFStatus = "Requirements Submitted";
+        }
+        if(Design_Ex2_InsertUpdate == "Update")
+        {
+            data.Id = Design_Ex2Id;
+            data.ID = Design_Ex2Id;
+        }
+        if(Design_Ex2_InsertUpdate == "Insert")
+        {
+            data.ApprovalStatusReviewer1 = "not started";
+            data.ApprovalStatusReviewer2 = "not started";
+            data.ApprovalStatusReviewer3 = "not started";
+            data.ApprovalStatusApprover1 = "not started";
+            data.ApprovalStatusApprover2 = "not started";
+            data.ApprovalStatusApprover3 = "not started";
+            data.Parent_x0020_ID = Id;
+        }        
+        return JSON.stringify(data);
+    }
+
+    function getformdata(metadata) {
+
+        var data = {};
+        data.__metadata = metadata;
+        data.Id = Id;
+        data.ID = Id;
+        data.Comments = getvalue("comments");
+        // Murugan
+        data.BTC0Id  = parseInt(getvalue("btc")); 
+        data.QuESTId = parseInt(getvalue("quest"));
+        data.PriorityId = parseInt(getvalue("priority"));
+        data.WorkflowId = parseInt(getvalue("workflow"));
+        data.UnconId = parseInt(getvalue("uncon"));
+        data.L3_Workflow = getvalue("l3workflow");
+        data.StatusId = parseInt(getvalue("status"));
+        data.Scope = getvalue("scope");
+        data.Sourcing = getvalue("sourcing");
+        data.L2_KPI = getvalue("l2kpi");
+        data.IT_x0020_Enablement = getvalue("itenablement");
+        data.L4_x0020_Documentation = getvalue("l4docu");
+        data.SP_x0020_Link_x0020_to_x0020_LDo = getvalue("splink");
+        data.Title = getvalue("unique");
+        return JSON.stringify(data);
+    }
+
+    var id;
+    var MContact2Id;
+    var MManagerId;
+    function setformdata(data) {
+        console.log("main data", data);
+        Id = data.Id;
+        MContact2Id = data.Contact2Id;
+        MManagerId = data.ManagerId;
+        setvalue("btc", data.BTC0Id);
+        setvalue("quest", data.QuESTId);
+        setvalue("priority", data.PriorityId);
+        setvalue("workflow", data.WorkflowId);
+        setvalue("uncon", data.UnconId);
+        setvalue("l3workflow", data.L3_Workflow);
+        setvalue("status", data.StatusId);
+        setvalue("scope", data.L0_Scope);
+        //setvalue("roles",data.L1_Roles);
+        setvalue("sourcing", data.Sourcing);
+        //setvalue("pilotiniti", data.Pilot_x0020_Initiated);
+        //setvalue("valuess",data.Value_x0020__x0024__x002f_Yr);
+        //setvalue("execution",data.Execution);
+        setvalue("l2kpi", data.L2_KPI);
+        setvalue("itenablement", data.IT_x0020_Enablement);
+        setvalue("l4docu", data.L4_x0020_Documentation);
+        setvalue("splink", $(data.SP_x0020_Link_x0020_to_x0020_LDo||"<div></div>").html());
+        setvalue("unique", data.Title);
+        setvalue("comments", $(data.Comments||"<div></div>").html());
+        setvalue("requestsummay", $(data.Request_x0020_Summary||"<div></div>").html());
+        setvalue("target", (data.Target||"T").split("T")[0]);
+        if($("#unique").val() == '')
+        {
+            $("#unique").val(data.ID)
+        }
+    }
+
+    function getDataMain(listid, itemid) {
+        return new Promise(function(resolve, reject) {
+            GetAjax("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/Web/Lists/GetByTitle('"+listid+"')/items("+itemid+")",
+                function(data) { resolve(data); },
+                function(jqXHR, textStatus, errorThrown) { reject(textStatus); }
+            );
+        })
+    }
+
+        var ddbtc = getDataUrl("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('Unconventional BTC Design Team Members')/Users?$top=1000")
+
+    var ddquest = getData("QuEST")
+
+    var ddworkflowrole = getData("Type")
+
+    var dduncon = getData("Uncon")
+
+    var ddpriority = getData("Priority")
+
+    var ddstatus = getData("Status")
+
+    var maindata = getDataMain("Uncon%20Design_Execution%20Tracking%20Resourcing%20SP", itemid);
+    var wfstatus = getData("WFStatus")
+
+    var promiselist = [ddbtc, ddquest, ddworkflowrole, dduncon, ddpriority, ddstatus, wfstatus, maindata]
+
+    Promise.all(promiselist).then(function(data) {
+        loadselect($("#btc"), data[0].d.results.map(function(x) { return { value: x.Id, text: x.Email } }));
+        loadselect($("#quest"), data[1].d.results.map(function(x) { return { value: x.Id, text: x.Title } }));
+        loadselect($("#workflow"), data[2].d.results.map(function(x) { return { value: x.Id, text: x.Title } }));
+        loadselect($("#uncon"), data[3].d.results.map(function(x) { return { value: x.Id, text: x.Title } }));
+        loadselect($("#priority"), data[4].d.results.map(function(x) { return { value: x.Id, text: x.Title } }));
+        loadselect($("#status"), data[5].d.results.map(function(x) { return { value: x.Id, text: x.Title } }));
+        setformdata(data[7].d);
+        checkIdExisttInDesign_Ex2("Design_Ex2", itemid, data[7].d);
+    });
+
+    var Design_Ex2_InsertUpdate = "";
+    function checkIdExisttInDesign_Ex2(listid, itemid, maindata)
+    {
+        GetAjax("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/Web/Lists/GetByTitle('"+listid+"')/items?$filter=Parent_x0020_ID eq "+itemid,
+                function(data) { 
+                    if(data.d.results.length > 0)
+                    {
+                        Design_Ex2_InsertUpdate = "Update";
+                        Design_Ex2Id = data.d.results[0].Id;
+                        getReivewApprovalEmailRequestSummary(maindata, data.d.results[0]);
+                    }else
+                    {
+                        Design_Ex2_InsertUpdate = "Insert";
+                        getReivewApprovalEmailRequestSummary(maindata, null);
+                    }  
+                },
+                function(jqXHR, textStatus, errorThrown) { alert("error not found");Design_Ex2_InsertUpdate = "Insert"; }
+                );
+    }
+
+    function getDataAutofill(url, success, error) {
+        $.ajax({
+            url: url,
+            type: "GET",
+            headers: {
+                "Accept": "application/json;odata=verbose",
+                "Content-Type": "application/json;odata=verbose",
+                "X-RequestDigest": $("#_REQUESTDIGEST").val(),
+            },
+            success: success,
+            error: error,
+        });
+    }
+
+    selectedAutoSelect = {
+        R2email: null,
+        R3email: null,
+        A2email: null,
+        A3email: null
+    }
+
+    function updateInputAutofill(ele, data) {
+        var databind = data.d.results.map(function(x) {return { label: x.Email, value: x.Id }});
+        if (databind.length > 0) {
+            ele.autocomplete({
+                source: databind,
+                minLength: 2,
+                select: function (event, ui) {
+                    event.preventDefault();
+                    ele.val(ui.item.label);
+                    selectedAutoSelect[ele.attr("id")] = ui.item.value;
+                    PK.render(ui.item.value);
+                }
+            });
+        }
+    }
+
+    function getReivewApprovalEmailRequestSummary(data, dataEx)
+    {
+        
+        // Delete Me
+        if(dataEx != null)
+        {
+        // Commented for Test
+        // var afR2email = getDataUrl("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('Uncon BTC Controllers')/Users?$top=10&$filter=Id eq "+dataEx.Reviewer2EmailId)
+        // var afR3email = getDataUrl("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('Uncon BU LT')/Users?$top=10&$filter=Id eq "+dataEx.Reviewer3EmailId)
+        // var afA2email = getDataUrl("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('Unconventional BTC Execution Teams')/Users?$top=10&$filter=Id eq "+dataEx.Approval2EmailId)
+        // var afA3email = getDataUrl("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('Unconventional BTC Design Team Owners')/Users?$top=10&$filter=Id eq "+dataEx.Approval3EmailId)
+        
+            // Delete Me
+            var afR2email = getDataUrl("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('ReviewerTest')/Users?$top=10&$filter=Id eq "+dataEx.Reviewer2EmailId)
+            var afR3email = getDataUrl("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('ReviewerTest')/Users?$top=10&$filter=Id eq "+dataEx.Reviewer3EmailId)
+            var afA2email = getDataUrl("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('ApproverTest')/Users?$top=10&$filter=Id eq "+dataEx.Approver2EmailId)
+            var afA3email = getDataUrl("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('ApproverTest')/Users?$top=10&$filter=Id eq "+dataEx.Approver3EmailId)
+        }
+       
+        var FunctionId = getDataUrl("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/Web/Lists/GetByTitle('Function')/items?$select=Id,Title&$filter=Id eq "+data.FunctionId)
+        var DisciplineId = getDataUrl("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/Web/Lists/GetByTitle('Discipline')/items?$select=Id,Title&$filter=Id eq "+data.DisciplineId)
+        var Sponsor_x0020_BUId = getDataUrl("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/Web/Lists/GetByTitle('Sponsor BU')/items?$select=Id,Title&$filter=Id eq "+data.Sponsor_x0020_BUId)
+        // Commented For Test
+        // var ManagerId = getDataUrl("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('Uncon BU LT')/Users?$top=10&$filter=Id eq "+data.ManagerId)
+        // Delete Me 
+        var ManagerId = getDataUrl("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('ApproverTest')/Users?$top=10&$filter=Id eq "+data.ManagerId)
+        // For Test
+        // var Contact2Id = getDataUrl("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('Unconventional BU Teams')/Users?$top=10&$filter=Id eq "+data.Contact2Id)
+        // Delete Me 
+        var Contact2Id = getDataUrl("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('ApproverTest')/Users?$top=10&$filter=Id eq "+data.Contact2Id)
+
+        var SubAreaId = getDataUrl("https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/Web/Lists/GetByTitle('Sub-Area')/items?$select=Id,Title&$filter=Id eq "+data.Sub_x002d_AreaId)
+
+        
+
+        var afpromiselist = [];
+        if(dataEx != null)
+        {
+            afpromiselist = [FunctionId, DisciplineId, Sponsor_x0020_BUId, ManagerId, Contact2Id, SubAreaId, afR2email, afR3email, afA2email, afA3email];
+        }else
+        {
+            afpromiselist = [FunctionId, DisciplineId, Sponsor_x0020_BUId, ManagerId, Contact2Id, SubAreaId];
+        }
+        Promise.all(afpromiselist).then(function(data) {
+            if(data[0].d.results.length > 0)
+            {
+                $("#functions").html(data[0].d.results[0].Title);
+            }
+            if(data[1].d.results.length > 0)
+            {
+                $("#decipline").html(data[1].d.results[0].Title);
+            }
+            if(data[2].d.results.length > 0)
+            {
+                $("#sponser").html(data[2].d.results[0].Title);
+            }   
+            if(data[3].d.results.length > 0)
+            {
+                $("#manager").html(data[3].d.results[0].Email);
+                $("#A1email").val(data[3].d.results[0].Email);
+            }
+            console.log("Contact2Id",data[4]);
+            if(data[4].d.results.length > 0)
+            {
+                $("#contact").html(data[4].d.results[0].Email);
+                $("#R1email").val(data[4].d.results[0].Email);
+            } 
+            if(data[5].d.results.length > 0)
+            {
+                $("#subarea").html(data[5].d.results[0].Title);
+            }              
+            if(dataEx != null)
+            {
+                if(data[5].d.results.length > 0)
+                {
+                    $("#R2email").val(data[6].d.results[0].Email);
+                    selectedAutoSelect.R2email = data[6].d.results[0].Id
+                }
+                if(data[6].d.results.length > 0)
+                {
+                    $("#R3email").val(data[7].d.results[0].Email);
+                    selectedAutoSelect.R3email = data[7].d.results[0].Id                
+                }
+                if(data[7].d.results.length > 0)
+                {
+                    $("#A2email").val(data[8].d.results[0].Email);
+                    selectedAutoSelect.A2email = data[8].d.results[0].Id
+                }
+                if(data[8].d.results.length > 0)
+                {
+                    $("#A3email").val(data[9].d.results[0].Email);
+                    selectedAutoSelect.A3email = data[9].d.results[0].Id
+                }
+            }
+        });
+    }
+    
+
+    $("#R2email").keyup(function () {
+        emailfilter = $("#R2email").val();
+        if(emailfilter)
+        {
+            url = "https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('ReviewerTest')/Users?$top=10&$filter=substringof('"+emailfilter+"',Email)";
+    //     url = "https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('Uncon BTC Controllers')/Users?$top=10&$filter=substringof('"+emailfilter+"',Email)";
+            getDataAutofill(url,
+                function(data) { updateInputAutofill($("#R2email"), data); },
+                function() { console.log("error"); }
+            );
+        }
+    });
+
+    $("#R3email").keyup(function () {
+        emailfilter = $("#R3email").val();
+        if(emailfilter)
+        {
+            url = "https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('ReviewerTest')/Users?$top=10&$filter=substringof('"+emailfilter+"',Email)";
+    //     url = "https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('Uncon BU LT')/Users?$top=10&$filter=substringof('"+emailfilter+"',Email)";
+            getDataAutofill(url,
+                function(data) { updateInputAutofill($("#R3email"), data); },
+                function() { console.log("error"); }
+            );
+        }
+    });
+
+    $("#A2email").keyup(function () {
+        emailfilter = $("#A2email").val();
+        if(emailfilter)
+        {
+            url = "https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('ApproverTest')/Users?$top=10&$filter=substringof('"+emailfilter+"',Email)";
+    //     url = "https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('Unconventional BTC Execution Teams')/Users?$top=10&$filter=substringof('"+emailfilter+"',Email)";
+            getDataAutofill(url,
+                function(data) { updateInputAutofill($("#A2email"), data); },
+                function() { console.log("error"); }
+            );
+        }
+    });
+
+    $("#A3email").keyup(function () {
+        emailfilter = $("#A3email").val();
+        if(emailfilter)
+        {
+            url = "https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('ApproverTest')/Users?$top=10&$filter=substringof('"+emailfilter+"',Email)";
+        //     url = "https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/web/sitegroups/getByName('Unconventional BTC Design Team Owners')/Users?$top=10&$filter=substringof('"+emailfilter+"',Email)";
+            getDataAutofill(url,
+                function(data) { updateInputAutofill($("#A3email"), data); },
+                function() { console.log("error"); }
+            );
+        }
+    });
+</script>    
+
+<script type="text/javascript">
+// validate and save data
+
+
+    $("#submitrequest").click(function(e) {
+        e.preventDefault();
+        var isValid = validateInputs();
+        console.log("submitrequest click",isValid);
+        if (isValid) {
+            $("#submitrequest").prop('disabled', true);
+            save(itemid);
+            upsertDesign_Ex2(itemid, true);
+        }
+        else {
+            return false;
+        }
+    });
+
+    $("#saverequest").click(function(e) {
+        e.preventDefault();
+        var isValid = validateInputs();
+        console.log("saverequest click",isValid)
+        if (isValid) {
+            save(itemid);
+            upsertDesign_Ex2(itemid, false);
+        }
+        else {
+            return false;
+        }
+
+    });
+
+
+    function validateInputs() {
+        $("[validation]").each(function (index, ele) { $(ele).css("border", "1px solid black") })
+        $("[validation]").each(function (index, ele) {
+            $(ele).keypress(function(e) {
+                $(e.target).css("border", "1px solid black")
+            });
+            if (index == 0) {
+                isValid = true;
+            }
+            if ($(ele).val() == undefined) {
+                isValid = false
+                $(ele).css("border", "1px solid red")
+                return;
+            }
+            if ($(ele).val() == null) {
+                isValid = false
+                $(ele).css("border", "1px solid red")
+                return;
+            }
+            if ($(ele).val().trim() == '') {
+                isValid = false
+                $(ele).css("border", "1px solid red")
+            }
+        });
+        return isValid;
+    }
+
+
+    function save(id) {
+        console.log("saving");
+        var metadata = { 'type': 'SP.Data.Uncon_x0020_Design_x005f_Execution_x0020_Tracking_x0020_Resourcing_x0020_SPListItem' }
+        var data1 = getformdata(metadata);
+        url = "https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/Web/Lists/GetByTitle('Uncon%20Design_Execution%20Tracking%20Resourcing%20SP')/items("+id+")";
+        metadata = { 'type': 'SP.Data.Uncon_x0020_Design_x005f_Execution_x0020_Tracking_x0020_Resourcing_x0020_SPListItem' };
+
+        jQuery.ajax({
+            url: url,
+            type: "POST",
+            data: data1,
+            headers: {
+                "X-HTTP-Method": "MERGE",
+                "accept": "application/json;odata=verbose",
+                "content-type": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "IF-MATCH": "*"
+            },
+            success: function () { console.log("success"); },
+            error: function (xhr, status, error) { logError(xhr, status, error); alert("error update"); }
+        });
+    }
+
+    function upsertDesign_Ex2(id, submit) {
+        console.log("upsertDesign_Ex2");
+        console.log(Design_Ex2_InsertUpdate)
+        if(Design_Ex2_InsertUpdate == "Update")
+        {
+            console.log(Design_Ex2_InsertUpdate)
+            console.log("Design_Ex2Id",Design_Ex2Id);
+            var metadata = { 'type': 'SP.Data.Design_x005f_Ex2ListItem' }
+            var data1 = getformdataDesign_Ex2(metadata, submit);
+            url = "https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/Web/Lists/GetByTitle('Design_Ex2')/items("+Design_Ex2Id+")";
+            jQuery.ajax({
+                url: url,
+                type: "POST",
+                data: data1,
+                headers: {
+                    "X-HTTP-Method": "MERGE",
+                    "accept": "application/json;odata=verbose",
+                    "content-type": "application/json;odata=verbose",
+                    "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                    "IF-MATCH": "*"
+                },
+                success: function () { alert("success upsertDesign_Ex2"); },
+                error: function (xhr, status, error) { logError(xhr, status, error); alert("error update upsertDesign_Ex2"); }
+            });            
+
+        }
+        if(Design_Ex2_InsertUpdate == "Insert")
+        {
+            console.log("Design_Ex2_InsertUpdate Inset");
+            var metadata = { 'type': 'SP.Data.Design_x005f_Ex2ListItem' }
+            var data1 = getformdataDesign_Ex2(metadata, submit);
+            url = "https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/Web/Lists/GetByTitle('Design_Ex2')/items";
+            jQuery.ajax({
+                url: url,
+                type: "POST",
+                data: data1,
+                headers: {
+                    "X-HTTP-Method": "POST",
+                    "accept": "application/json;odata=verbose",
+                    "content-type": "application/json;odata=verbose",
+                    "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                    "IF-MATCH": "*"
+                },
+                success: function () { alert("success"); },
+                error: function (xhr, status, error) { logError(xhr, status, error); alert("error update"); }
+		    });
+        }
+    }
+
+
+
+</script>
+
+<script type="text/javascript">
+    // function InitDropDown() {
+    //     var siteUrl = "https://ishareteam2.na.xom.com/sites/UnconBTC/DET/_api/Web/Lists/GetByTitle('Uncon%20Design_Execution%20Tracking%20Resourcing%20SP')/items?$select=Id,BU_x0020_Contact_x0020_Defined,BTCId,FunctionId,FunctionId/Title";
+    // }
+</script>
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+<link rel="stylesheet" href="https://ishareteam2.na.xom.com/sites/UnconBTC/UnconBTC/DW/SitePages/style.css"></link>
+<link rel="stylesheet" href="https://ishareteam2.na.xom.com/sites/UnconBTC/UnconBTC/DW/SitePages/jquery-ui.css"></link>
+<script src="https://ishareteam2.na.xom.com/sites/UnconBTC/UnconBTC/DW/SitePages/jquery-3.6.1.min.js" type="text/javascript"></script>
+<script src="https://ishareteam2.na.xom.com/sites/UnconBTC/UnconBTC/DW/SitePages/jquery-ui.js" type="text/javascript"></script>
+<script src="https://ishareteam2.na.xom.com/sites/UnconBTC/UnconBTC/DW/SitePages/bluebird.min.js"></script>
+<style>
+	.box2 {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		padding: 10px 0;
+		width: 300px;
+		height: 50px;
+	}
+</style>
+<div class="form_main_conatiner">
+	<form class="form_conatiner">
+		<fieldset>
+			<legend>Request</legend>
+			<div class="form_row-1">
+				<div class="row-1-1">
+					<div class="box2">
+						<label><b>BU Contact</b></label>
+						<label id="contact" name="contact">
+					</div>
+					<div class="box2">
+						<label><b>BU Manager (DOAG Approver)</b></label>
+						<label id="manager" name="manager"></label>
+					</div>
+				</div>
+				<div class="row-1-1">
+					<div class="box2">
+						<label><b>Sponser BU</b></label>
+						<label name="sponser" id="sponser"></label>
+					</div>
+
+					<div class="box2">
+						<label><b>Sub-Area</b></label>
+						<label name="subarea" id="subarea"></label>
+					</div>
+				</div>
+				<div class="row-1-1">
+					<div class="box2">
+						<label><b>Function</b></label>
+						<label name="functions" id="functions"></label>
+					</div>
+					<div class="box2">
+						<label><b>Discipline</b></label>
+						<label name="decipline" id="decipline"></label>
+					</div>
+				</div>
+				<div class="row-1-1">
+					<div class="box2">
+						<label><b>Target</b></label>
+						<label id="target"></label>
+					</div>
+					<div class="box2">
+						<label><b>Request Summary</b></label>
+						<label name="requestsummay" id="requestsummay"></label>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Basic Info</legend>
+			<div class="form_row-1">
+				<div class="row-1-1">
+
+					<div class="box tooltip">
+						<label>Unique ID</label>
+						<input type="text" id="unique" validation />
+					</div>
+
+					<div class="box tooltip">
+						<label>BTC (WM Engr)</label>
+						<select class="classic" name="" id="btc" validation>
+						</select>
+					</div>
+
+					<div class="box tooltip">
+						<label>Design Team Contact</label>
+						<select class="classic" name="" id="quest" validation>
+						</select>
+					</div>
+				</div>
+				<div class="row-1-2">
+					<div class="box tooltip">
+						<label>WorkFlow/Role/Adhoc</label>
+						<select class="classic" name="" id="workflow" validation>
+						</select>
+					</div>
+					<div class="box tooltip">
+						<label>Uncon DPOC</label>
+						<select class="classic" name="" id="uncon" validation>
+						</select>
+					</div>
+					<div class="box tooltip">
+						<label>Priority</label>
+						<select name="" id="priority" validation>
+						</select>
+					</div>
+				</div>
+				<div class="row-1-3">
+					<div class="box tooltip">
+						<label>Status</label>
+						<select class="classic" name="" id="status" validation>
+						</select>
+					</div>
+					<div class="box tooltip">
+						<label>Sourcing</label>
+						<select class="classic" name="" id="sourcing" validation>
+							<option value="MSP">MSP</option>
+							<option value="MSP + BTC">MSP + BTC</option>
+							<option value="BTC">BTC</option>
+							<option value="Y">Y</option>
+							<option value="N">N</option>
+							<option value="NA">NA</option>
+						</select>
+					</div>
+					<div class="box tooltip">
+						<label>Scope</label>
+						<textarea id="scope" validation>
+							</textarea>
+					</div>
+				</div>
+				<div class="row-1-3">
+					<div class="box tooltip">
+						<label>IT Enablement</label>
+						<textarea id="itenablement" validation></textarea>
+					</div>
+					<div class="box tooltip">
+						<span class="tooltiptext">Status update</span>
+						<label>Comments</label>
+						<textarea id="comments" validation>
+							</textarea>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend>L Docs & KPIs</legend>
+			<div class="form_row-3">
+				<div class="row-3-1">
+					<div class="box tooltip">
+						<label>L2_KPI</label>
+						<textarea id="l2kpi" validation></textarea>
+					</div>
+					<div class="box tooltip">
+						<label>L2_Approved Workflow</label>
+						<select class="classic" name="" id="l3workflow" validation>
+							<option value="Y">Y</option>
+							<option value="N">N</option>
+							<option value="NA">NA</option>
+						</select>
+					</div>
+					<div class="box tooltip">
+						<label>L4 Documenatation</label>
+						<select class="classic" name="" id="l4docu" validation>
+							<option value="Y">Y</option>
+							<option value="N">N</option>
+							<option value="NA">NA</option>
+						</select>
+					</div>
+				</div>
+				<div class="row-3-2">
+
+
+					<div class="box tooltip">
+						<label>SP Link to LDoc Folder</label>
+						<input type="text" id="splink" validation />
+					</div>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Review & Approval </legend>
+			<div class="form_row-4">
+				<div class="row-4-1">
+					<div class="box tooltip">
+						<label>Reviewer 1 Email</label>
+						<input type="email" id="R1email" disabled />
+					</div>
+					<div class="box tooltip">
+						<span class="tooltiptext">Reviewer 2 - Uncon Controller
+						</span>
+						<label>Reviewer 2 Email</label>
+						<input type="email" id="R2email" validation />
+					</div>
+					<div class="box tooltip">
+						<span class="tooltiptext">Uncon Digital DPOC</span>
+						<label>Reviewer 3 Email</label>
+						<input type="email" id="R3email" validation />
+					</div>
+				</div>
+				<div class="row-4-2">
+					<div class="box tooltip">
+						<label>Approver 1</label>
+						<input type="email" id="A1email" disabled />
+					</div>
+					<div class="box tooltip">
+						<span class="tooltiptext">BTC discipline Supervisor
+						</span>
+						<label>Approver 2</label>
+						<input type="email" id="A2email" validation />
+					</div>
+					<div class="box tooltip">
+						<span class="tooltiptext">BTC Work Migration Manager
+						</span>
+						<label>Approver 3</label>
+						<input type="email" id="A3email" validation />
+					</div>
+				</div>
+			</div>
+		</fieldset>
+		<div class="submit text-center">
+			<button id="saverequest" class="btn btn-primary" type="button" style="margin-right:25px">Save</button>
+			<button id="submitrequest" class="btn btn-primary" type="button">Submit</button>
+		</div>
+	</form>
+</div>
