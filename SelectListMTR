@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://ishareteam3.na.xom.com/sites/eamp/SiteAssets/CSS/SelectGrid.css">
+    <title>Document</title>
+    <style>
+        nobr {
+            display: none;
+        }
+		
+		.actions a i{
+        padding: 3px !important;
+        margin-right: 10px !important;
+        }
+		
+		.btn{
+    background-color: #0078D7;
+    color: white;
+    border-radius: 5px;
+		}
+		
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="form_main_conatiner" id="workform">
+        <fieldset>
+            <legend>Workform</legend>
+            <div class="form_row-1">
+                <div class="tab-pane conatainer fade">
+                    <div class="table-responsive table-overflow">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td><b>Date<b></td>
+                                    <td><b>Form</td>
+                                    <td><b>Document Title</td>
+                                    <td><b>Status</td>
+                                    <td><b>Action</td>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyorganizationTL">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="rowtemplateTL" style="display: none;">
+                        <table style="width: 100%; border:1px">
+                            <tr>
+                                <td><span name="orcn"></span><span name="nluk"></span></td>
+                                <td><span name="formname"></span></td>
+                                <td><span name="Title"></span></td>
+                                <td><span name="Status"></span></td>
+                                <td><span name="action"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="flex space-x-8  items-center">
+        <label>Submit Comments
+        </label>
+        <textarea class="w-[500px] h-12 border border-black" id="textarea">
+        </textarea>
+    </div>
+
+    <div class="btnmain">
+        <button class="btn" onclick="InsertItem();" type="button" id="srequest"> Submit</button>
+    </div>
+<br>
+    <div class="form_main_conatiner">
+        <fieldset>
+            <legend>List Of Templates</legend>
+            <div class="form_row-1">
+                <div class="tab-pane conatainer fade">
+                    <div class="table-responsive table-overflow">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td><b>Form</td>
+                                    <td><b>Revision Date</td>
+                                    <td><b>Action</td>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyorganization">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="rowtemplate" style="display: none;">
+                        <table style="width:100%; border:1px;">
+                            <tr>
+                                <td><span name="Title"></span></td>
+                                <td><span name="Modified"></span></td>
+                                <td><span name="action"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script>
+
+        var deleteurl;		
+     	
+          function getQueryString() {
+          var key = false, res = {}, itm = null;
+          // get the query string without the ?
+          var qs = location.search.substring(1);
+          // check for the key as an argument
+          if (arguments.length > 0 && arguments[0].length > 1)
+            key = arguments[0];
+          // make a regex pattern to grab key/value
+          var pattern = /([^&=]+)=([^&]*)/g;
+          // loop the items in the query string, either
+          // find a match to the argument, or build an object
+          // with key/value pairs
+            while (itm = pattern.exec(qs)) {
+            if (key !== false && decodeURIComponent(itm[1]) === key)
+            return decodeURIComponent(itm[2]);
+            else if (key === false)
+            res[decodeURIComponent(itm[1])] = decodeURIComponent(itm[2]);
+          }
+          return key === false ? res : null;
+    }
+
+    queryParam = getQueryString();
+    var itemid = queryParam.BUID;
+		
+    var BUrequestID = _spPageContextInfo;		
+    console.log(BUrequestID);
+
+<!-- Data Binding Functionality in Templates [PLForms] -->
+		
+        function addrowTL(data) {
+            var rowele = $("#rowtemplate tr").clone()[0];
+            $("[name='Title']", rowele).html(data.File.Name.split('.')[0]);
+            $("[name='Modified']", rowele).html(data.Modified?data.Modified.slice(0,10):"");
+
+            var link = "https://ishareteam3.na.xom.com/sites/eamp/PLForms/0729.aspx";
+            if (data.File.Name.split('.')[0] == "0730") {
+                link = "https://ishareteam3.na.xom.com/sites/eamp/PLForms/0730.aspx";
+            }
+            var ele = "<div class='actions' style='display:flex; gap:10px;'><a href='" + link + "?BUID=" + itemid + "&Mode=NewView'><i class='fa fa-eye' style='font-size:16.5px'></i></a><a href='" + link + "?BUID=" + itemid + "&Mode=New'><i class='fa fa-plus' style='font-size:16.5px'></i></a></div>";
+            $("[name='action']", rowele).html(ele);
+            $("#tbodyorganization").append(rowele)
+        }
+
+
+        $(document).ready(function () {
+            getData()
+        }
+        )
+
+<!-- Fetching Functionality in Templates [PLForms] data -->
+
+        function getData() {
+            function ajaxget(url) {
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    headers: {
+                        "accept": "application/json; odata=verbose"
+                    },
+                    success: function (data) {
+                        console.log(data, "PLForms data");
+
+                        var items = data.d.results;
+                        items.forEach(function (x) { addrowTL(x); });
+                    },
+                    error: function (error) {
+                        alert("error");
+                    }
+                });
+            }
+            ajaxget(_spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('PLForms')/items?Select=*,File/Name&$expand=File");
+        }
+
+
+<!-- Data Binding Functionality in the Table [Workfrom] -->
+
+        function addrow(data, listname) {
+            console.log(data);
+            var rowele = $("#rowtemplateTL tr").clone()[0];
+            $("[name='orcn']", rowele).html(data.orcn?data.orcn.slice(0,10):"");
+            $("[name='formname']", rowele).html(listname);
+            $("[name='Title']", rowele).html(data.Title);
+            $("[name='Status']", rowele).html(data.Status);
+            $("[name='nluk']", rowele).html(data.nluk?data.nluk.slice(0,10):"");
+            $("[name='Title']", rowele).html(data.Title);
+            $("[name='Status']", rowele).html(data.Status);
+            var ListItemID = data.ID;
+
+            var link = "https://ishareteam3.na.xom.com/sites/eamp/PLForms/";
+            link = link + listname;
+            link = link + ".aspx";
+
+            var formname = listname;
+
+            deleteurl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('";
+            deleteurl = deleteurl + formname + "')/items(" + ListItemID + ")";
+            console.log(deleteurl);
+            console.log(link);
+
+            var ele = "<div class='actions' style='display:flex; gap:15px;'><a href='" + link + "?FormID=" + ListItemID + "&Mode=View'><i class='fa fa-eye' style='font-size:16.5px'></i></a><a href='" + link + "?FormID=" + ListItemID + "&Mode=Edit'><i class='fa fa-edit' style='font-size:16.5px'></i></a><a type='button' class='delete' link="+ deleteurl+"> <i class='fa fa-trash' style='font-size:16.5px'></i> </a> <a href='"+link+"?FormID="+ListItemID+"&Mode=Copy'><i class='fa fa-copy' style='font-size:16.5px'></i></a></div >"           
+
+            $("[name='action']", rowele).html(ele);
+
+            $("#tbodyRequestList").append(rowele)
+
+            $("#tbodyorganizationTL").append(rowele)
+        }
+
+<!-- Fetching Functionality in Select Grid [0729/0730] data -->
+
+        $(document).ready(function () {
+            function ajaxget(url, listname) {
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    headers: {
+                        "accept": "application/json; odata=verbose"
+                    },
+
+                    success: function (data) {
+
+                    console.log(data, "data");
+
+                    var items = data.d.results;
+
+                        var filteredItem = items.filter(function (itm) {
+                        return listname == '0729' ? itm.BUIDId == itemid : itm.BUIDId == itemid
+                        });
+
+                        console.log(filteredItem,"Filter Item 0729/0730")
+
+                        filteredItem.forEach(function (x) { addrow(x, listname); });
+                        var linkref;
+
+                        $(".delete").each(function (i, ele) {
+                            $(ele).click(function (e) {
+                                linkref = $(e.target)[0].parentNode.attributes[2].nodeValue
+                                deleteform(linkref)
+                            })
+                        })
+                    },
+                    error: function (error) {
+                        alert("error");
+                    }
+                });
+            }
+            ajaxget(_spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('0729')/items", '0729');
+            ajaxget(_spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('0730')/items", '0730');
+        });
+
+<!-- Deleting Functionality in Select Grid -->
+
+        function deleteform(deleteurl) {
+            $.ajax
+                ({
+                    url: deleteurl,
+                    type: "DELETE",
+                    headers:
+                    {
+                        "Accept": "application/json;odata=verbose",
+                        "Content-Type": "application/json;odata=verbose",
+                        "IF-MATCH": "*",
+                        "X-RequestDigest": $("#__REQUESTDIGEST").val()
+                    },
+                    success: function (data, status, xhr) {
+                        console.log("Delete Done");
+                        alert("Deleted Succesfully");
+                        location.reload();
+                        getData()
+                    },
+                    error: function (xhr, status, error) {
+                        console.log("Failed");
+                    }
+                });
+        }
+
+ GetItemId()
+
+<!-- Posting Submit Comment and Triggering Button [POST] in BURequest List -->
+
+        function InsertItem() {
+            $.ajax
+                ({
+                    url: _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getByTitle('BU%20Request%20list')/items(" + itemid + ")",
+                    type: "POST",
+                    headers:
+                    {
+                        "Accept": "application/json;odata=verbose",
+                        "Content-Type": "application/json;odata=verbose",
+                        "IF-MATCH": "*",
+                        "X-HTTP-Method": "MERGE",
+                        "X-RequestDigest": $("#__REQUESTDIGEST").val()
+                    },
+                    data: JSON.stringify({
+                        __metadata:
+                        {
+                            type: "SP.Data.BU_x0020_Request_x0020_listListItem"
+                        },
+                        test: "Yes",
+                       Submit_x0020_Comment : document.getElementById("textarea").value
+                    }),
+                    success: function (data, status, xhr) {
+                        console.log("Success Item Inserted");
+                        alert("Submit Done");
+                    },
+                    error: function (xhr, status, error) {
+                        console.log("Failed");
+                    }
+                });
+        }
+
+
+<!-- Fetching BURequest List -->
+
+        function GetItemId() {
+            $.ajax
+                ({
+                    url: _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('BU Request list')/items?$top=5000&$expand=yjsk&$select=*,yjsk/Title",
+                    type: "GET",
+                    headers:
+                    {
+                        "Accept": "application/json;odata=verbose"
+                    },
+                    success: function (data, status, xhr) {
+                        var dataresults = data.d.results;
+                        console.log(data,"BU Item all");
+                        var filteredItem = dataresults.filter(function (itm) {
+                        return  itm.ID == itemid 
+                        });
+                        console.log(filteredItem,"Filtered BUitem")
+                        if(filteredItem[0].test=="Yes"){
+                        $("#srequest").hide();
+}
+                    },
+                    error: function (xhr, status, error) {
+                        console.log("Failed");
+                    }
+                });
+        }
+
+ <!-- Page Title Hiding -->
+
+ $("#pageTitle").hide()
+
+</script>
+</body>
+
+</html>
