@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+        .actions a{
+        padding: 5px;
+        margin-right: 10px;
+        }
+.btn{
+padding:15px;
+background-color:blue;
+ouline:none;
+color:white;
+}
+.btn:hover{
+background-color:#00233;
+}
+    </style>
+</head>
+<body> 
+   
+    <div class="form_main_conatiner">
+    <fieldset>
+    <legend>History</legend> 
+            <div class="form_row-1">
+                <div class="tab-pane conatainer fade" >
+                <div class="table-responsive table-overflow">
+                   <table class="table" >
+                        <thead>
+                            <tr> <td><b>Created Date<b></td>
+                                      <td><b>Form</td>
+				       <td><b>Modified By</td>
+                                        <td><b>Status</td>
+                                        <td><b>Action</td>
+                          </tr>
+                         </thead>
+                       <tbody id="tbodyorganizationTL">
+                        </tbody>
+                   </table> 
+                </div>
+               <div id="rowtemplateTL" style="display: none;">
+                        <table   style="width: 100%; border:1px">
+                            <tr>
+                                   <td><span name="date"></span></td>
+                                    <td><span name="formname"></span></td>
+				    <td><span name="modifiedBy"></span></td>
+                                    <td><span name="Status"></span></td>
+                                    <td><span name="action"></span></td>
+                             </tr>
+                </table>
+                </div>  
+			
+            </div>
+        </div>
+    </fieldset>
+</div>
+       <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	   
+	   <script>  
+	   
+  <!-- Variables -->
+
+          function getQueryString() {
+          var key = false, res = {}, itm = null;
+          // get the query string without the ?
+          var qs = location.search.substring(1);
+          // check for the key as an argument
+          if (arguments.length > 0 && arguments[0].length > 1)
+            key = arguments[0];
+          // make a regex pattern to grab key/value
+          var pattern = /([^&=]+)=([^&]*)/g;
+          // loop the items in the query string, either
+          // find a match to the argument, or build an object
+          // with key/value pairs
+            while (itm = pattern.exec(qs)) {
+            if (key !== false && decodeURIComponent(itm[1]) === key)
+            return decodeURIComponent(itm[2]);
+            else if (key === false)
+              res[decodeURIComponent(itm[1])] = decodeURIComponent(itm[2]);
+          }
+
+          return key === false ? res : null;
+    }
+    queryParam = getQueryString();
+    var itemid = queryParam.BUID;
+
+				
+
+				var BUrequestID = _spPageContextInfo;
+		
+				console.log(BUrequestID, "BUrequestID");
+				
+		<!-- Date change format		 -->
+		       
+	    Date.prototype.mmddyyyyformat = function () {
+        var mm = this.getMonth() + 1; // getMonth() is zero-based
+        var dd = this.getDate();
+        if (this.getFullYear() == "1970") {
+            return "";
+        }
+        return [(mm > 9 ? '' : '0') + mm,
+        (dd > 9 ? '' : '0') + dd,
+        this.getFullYear()
+        ].join('/');
+    }; 
+			 
+		
+		        <!-- Fetching/Get Data for PLForms History -->
+		
+			    $(document).ready(function(){
+                function ajaxget(url){
+                $.ajax({
+                    type: "GET",
+                    url : url,
+                    headers: {
+                    "accept":"application/json; odata=verbose"
+                      },
+                    success: function(data){
+                    console.log(data, "data PLForms");
+                    },
+                    error: function(error){
+                     alert("error");
+                    }
+                });
+            }
+           
+           ajaxget(_spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('PLForms')/items?Select=*,File/Name&$expand=File");
+       });
+       
+	       <!-- Adding/Binding Data to the Table -->
+	   
+		   function addrow(data,listname){
+           console.log(data,"Bindind Data");
+            
+            var rowele = $("#rowtemplateTL tr").clone()[0];
+            data.nluk?$("[name='date']",rowele).html(new Date(data.nluk).mmddyyyyformat()):$("[name='date']",rowele).html(new Date(data.orcn).mmddyyyyformat());
+            $("[name='date']",rowele).html(data.orcn);
+            $("[name='formname']",rowele).html(listname);
+	    $("[name='modifiedBy']",rowele).html(data.Editor.Title);
+            $("[name='Status']",rowele).html(data.Status);
+            var ListItemID=data.ID;
+
+			var link="https://ishareteam3.na.xom.com/sites/eamp/PLForms/";
+			link=link+listname;
+			link=link+".aspx";
+			console.log(link,"Link URL");
+
+			var ele = "<div class='actions' style='display:flex; gap:15px;'><a href='"+ link +"?FormID="+ ListItemID +"&Mode=View'><i class='fa fa-eye' style='font-size:16.5px'></i></a></div>";
+			
+			$("[name='action']",rowele).html(ele);
+
+			$("#tbodyRequestList").append(rowele)
+           
+			$("#tbodyorganizationTL").append(rowele)
+				}
+  
+           <!-- Fetching/Get Data for ListName -->
+  
+            $(document).ready(function(){
+            function ajaxget(url,listname){
+            $.ajax({
+                type: "GET",
+                url : url,
+                headers: {
+                "accept":"application/json; odata=verbose"
+                  },
+              
+                success: function(data){
+				
+                console.log(data, "data Get List");
+              
+                var items = data.d.results;
+                 
+                var filteredItem =  items.filter(function(itm) {
+
+                return listname == '0729' ?itm.BU_x0020_RequestIdId == itemid : itm.BUIDId== itemid
+                  
+				});
+				console.log(filteredItem)
+				filteredItem.forEach(function(x){addrow(x,listname);});
+
+
+
+                },
+                error: function(error){
+                 alert("error");
+                }
+            });
+			}
+				ajaxget(_spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('0729')/items?$top=5000&$expand=Editor&$select=*,Editor/Title",'0729');
+				ajaxget(_spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('0730')/items?$top=5000&$expand=Editor&$select=*,Editor/Title",'0730');
+
+				});		 
+  
+  
+  </script>
+<script>$("#pageTitle").hide()</script>
+ <script src=https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js></script>
+</body>
+</html>
