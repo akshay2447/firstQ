@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ishareteam3.na.xom.com/sites/eamp/SiteAssets/CSS/BURequest.CSS">
+<style>
+nobr{
+display:none;
+}
+
+ .actions i{
+			padding: 05px !important;
+			margin-right: 05px !important;
+			}
+</style>
+</head>
+<body> 
+<div class="btn-main-group">
+<a href="https://ishareteam3.na.xom.com/sites/eamp/MTRWebPartPage/Dashboard.aspx" target="_blank" style="color:white"  class="btn" >Dashboard</a>
+<div class="btn-group">
+<button class="btn" onclick="window.print()" type="button">Export to PDF</a></button>
+<a href="https://ishareteam3.na.xom.com/sites/eamp/Lists/BU%20Request%20list/NewForm.aspx"  target="_blank" style="color:white" class="btn">New Request</a>
+<a href="https://ishareteam3.na.xom.com/sites/eamp/MTRWebPartPage/Technical%20Review%20Page.aspx"  target="_blank" style="color:white" class="btn">BU Review</a>
+</div>   
+</div>  
+<br><br>
+    <div class="form_main_conatiner">
+    <fieldset>
+    <legend>BU Request</legend> 
+            <div class="form_row-1">
+                <div class="tab-pane conatainer fade" >
+                <div class="table-responsive table-overflow">
+                   <table class="table" >
+                        <thead>
+                            <tr> <td><b>Project Number<b></td>
+                                      <td><b>Project Title</td>
+                                       <td><b>Requested By</td>
+                                       <td><b>Requested To</td>
+                                       <td><b>Requested Date</td>
+                                       <td><b>Status</td>
+                                       <td><b>Action</td>
+                            </tr>
+                         </thead>
+                       <tbody id="tbodyorganizationTL">
+                        </tbody>
+                   </table> 
+                </div>
+                <div id="rowtemplateTL" style="display: none;">
+                    <table   style="width: 100%; border:1px;">
+                        <tr>
+                               <td><span name="pm5x"></span></td>
+                               <td><span name="Title"></span></td>
+                               <td><span name="Author"></span></td>
+                               <td><span name="Requested_x0020_to"></span></td>
+                               <td><span name="Created"></span></td>
+                               <td><span name="p4hv"></span></td>
+                               <td><span name="action"></span></td>
+                        </tr>
+            </table>
+            </div>    
+            </div>
+            </div>
+    </fieldset>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>      
+<script>
+
+<!-- Binding the data to the table -->
+
+    function addrowTL(data){   
+                var rowele = $("#rowtemplateTL tr").clone()[0];
+                $("[name='pm5x']",rowele).html(data.pm5x);
+                $("[name='Title']",rowele).html(data.Title);
+                $("[name='Author']",rowele).html(data.yjsk.Title);
+                $("[name='Requested_x0020_to']",rowele).html(data.Requested_x0020_to.Title);
+                $("[name='Created']",rowele).html(data.Created?data.Created.slice(0,10):"");
+                $("[name='p4hv']",rowele).html(data.p4hv);
+	 
+var ele = "<div class='actions' style='display:flex; gap:15px;'><a href='" + _spPageContextInfo.webAbsoluteUrl+"/Lists/BU%20Request%20list/DispForm.aspx?ID=" + data.ID + "'><i class='fa fa-eye' style='font-size:16.5px'></i></a><a href='" + _spPageContextInfo.webAbsoluteUrl + "/MTRWebPartPage/select.aspx?BUID=" + data.ID + "'><i class='fa fa-plus' style='font-size:16.5px'></i></a><a href='" + _spPageContextInfo.webAbsoluteUrl + "/MTRWebPartPage/History.aspx?BUID=" + data.ID + "'><i class='fa fa-history' style='font-size:16.5px'></i></a></div>";
+  
+$("[name='action']",rowele).html(ele);
+ 
+$("#tbodyRequestList").append(rowele)
+          
+$("#tbodyorganizationTL").append(rowele)
+            }
+
+ <!-- Fetching the BU Request List -->
+
+            $(document).ready(function(){
+            function ajaxget(url){
+                $.ajax({
+                    type: "GET",
+                    url : url,
+                    headers: {
+                    "accept":"application/json; odata=verbose"
+                      },
+                    success: function(data){
+                    console.log(data, "data");
+                    var items = data.d.results;
+                    items.forEach(function(x) {addrowTL(x);});   
+                    },
+                    error: function(error){
+                     alert("error");
+                    }
+                });
+            }
+           ajaxget(_spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('BU Request list')/items?$top=5000&$expand=yjsk,Requested_x0020_to&$select=*,yjsk/Title,Requested_x0020_to/Title");
+       });
+       
+    </script>
+
+ <!-- Page Title Hiding -->
+
+<script>$("#pageTitle").hide()</script>
+
+</body>
+</html>
