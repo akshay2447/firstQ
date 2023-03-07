@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>MTR</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <style>
+.background{
+position:fixed;
+height:100vh;
+width:100vw;
+background-color: rgba(0, 0, 0, 0.75);
+backdrop-filter: blur(15px);
+top:0;
+left:0;
+}
+        .no-border {
+            border: 0;
+            box-shadow: none;
+            /* You may want to include this as bootstrap applies these styles too */
+        }
+
+        .selector-for-some-widget {
+            box-sizing: content-box;
+        }
+
+        .icon {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+.navbar2{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <div class="w3-main nosidebar">
+        <div class="w3-row">
+            <div class="w3-container">
+ <div class="navbar2">
+                <h4 class="page-title"><i class="fa fa-check-square-o"></i> Materials and Corrosion Requirements
+                    Checklist:</h4>
+ <i class="fa fa-file-pdf-o" onclick="window.print()" style="color:red;font-size:48px;"></i>
+		  </div></div>
+                <hr />
+
+     <div class="card mb-4 bg-light">
+		<div class="card-body">
+             <div class="row">
+                  <div class="col-md-4 form-group">
+                  <label class="col-form-label">Facility/Terminal:</label>
+                           <input type="number" id="facility" class="form-control view"
+                                    aria-label="Default select example">
+  <div class="invalid-feedback">Please Enter Correct Facility/Terminal</div>
+                            </div>
+
+                            <div class="col-md-4 form-group">
+                                <label class="col-form-label">Project Title: </label>
+                                <input type="text" id="ptitle" class="form-control view" aria-label="Default select example">
+                                <div class="invalid-feedback">Please Enter Correct Project Title</div>
+                            </div>
+
+                            <div class="col-md-4 form-group">
+                                <label class="col-form-label">Project Number:</label>
+                                <input type="number" id="pnumber" class="form-control view"
+                                    aria-label="Default select example">
+   <div class="invalid-feedback">Please Enter Correct Project Number</div>
+                            </div>
+
+                            <div class="col-md-4 form-group">
+                                <label class="col-form-label">Project Manager:</label>
+                                <input type="text" id="pmanager" class="form-control view"
+                                    aria-label="Default select example">
+                                    <div class="invalid-feedback">Please Enter Correct Project Manager Name</div>
+                            </div>
+
+                            <div class="col-md-4 form-group">
+                                <label class="col-form-label">Product Description:</label>
+                                <input type="text" id="pdescription" class="form-control view"
+                                    aria-label="Default select example">
+                                    <div class="invalid-feedback">Please Enter Correct Product description</div>
+                            </div>
+
+                            <div class="col-md-4 form-group">
+                                <label class="col-form-label">Heat number/s:</label>
+                                <input type="text" id="heatnumber" class="form-control view"
+                                    aria-label="Default select example">
+                                    <div class="invalid-feedback">Please Enter Correct Heat number/s</div>
+                            </div>
+
+                            <div class="col-md-4 form-group">
+                                <label class="col-form-label">Date:</label>
+                                <input type="date" id="mdate" class="form-control date-1 view"
+                                    aria-label="Default select example">
+                                    <div class="invalid-feedback">Please Enter Date mm/dd/yyyy</div>
+                            </div>
+
+
+                            <div class="col-md-4 form-group">
+                                <label class="col-form-label">Project Manager Signature:</label>
+                                <input type="text" id="signature"  class="form-control no-border border-bottom view"
+                                    aria-label="Default select example">
+                                    <div class="invalid-feedback">Please Enter Correct Signature</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <p>The embedded checklists provide a list of considerations when executing a project within EMPCo. They
+                    are meant to provide the user a list of applicable GPs and Manuals, as well as, best practices to
+                    follow when performing the tasks below.</p>
+                <h4 class="page-title"><i class="fa fa-file-text-o"></i> Material Test Report (MTR) Review : PL-0730
+                </h4>
+                <hr />
+
+
+                <table class="table table-bordered mb-4">
+                    <thead>
+                        <tr>
+                            <th colspan="4">This checklist provides guidance on reviewing MTRs, with a focus on line
+                                pipe purchased to GP 18-87-01. Other components (such as flanges, etc.) are discussed
+                                below.</th>
+                        </tr>
+                        <tr>
+                            <th width="8%">SL.No</th>
+                            <th width="52%">Task or Consideration</th>
+                            <th width="8%">Required</th>
+                            <th width="25%">Comments</th>
+                            <th width="15%">Date Completed</th>
+
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td colspan="5">
+                                <h6>This checklist focuses on line pipe purchased to GP 18-87-01. When reviewing other
+                                    components (such as fittings, flanges, etc.) perform the following check:</h6>
+                                <ul>
+                                    <li>Complete Step 1 below: Confirming manufacturer is on the AML/QML, both vendor
+                                        and location</li>
+                                    <li>Confirm Material Standard: Confirm material standard with applicable design GP
+                                        is referenced within MTR </li>
+                                    <li>Confirm Material CE: Confirm per requirements in applicable design GP, or per
+                                        the criteria in Step 5 below if CE limits are not provided in applicable pipe
+                                        design GP.
+                                    </li>
+                                </ul>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="5"> When line pipe is purchased to API 5L and GP 18-87-01, the following seven
+                                steps outline the process to review a MTR. MTR results can be inserted into the below
+                                Excel tool to confirm if MTR meets the requirements of GP 18-87-01.<br />
+                                <span style="text-align: center">Link to MTR Review Tool</span>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td colspan="5">
+                                <h5>Step 1: Compare the pipe manufacturer to the AML/QML/ESML (GP 18-87-01, Section 3.
+                                    1)</h5>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td> Compare both the vendor and location</td>
+                            <td class="requiredbox view"><input type="checkbox" id="puxw"></td>
+                            <td><input type="text" id="t1q1c" class="comments view"></td>
+                            <td><input type="date" id="t1q1d" class="date view"></td>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td> Check that vendor is qualified for grade/type</td>
+                            <td class="requiredbox view"><input type="checkbox" id="x9y2"></td>
+                            <td><input type="text" id="t1q2c" class="comments view"></td>
+                            </td>
+                            <td><input type="date" id="t1q2d" class="date view"></td>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td colspan="5">
+                                <h5>Step 2: Confirm Pipe Standard (GP 18-87-01, Section 5. 2)</h5>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td> Confirm API 5L pipe standard, or other approved alternative (can be multi-certified)
+                            </td>
+                            <td class="requiredbox view"><input type="checkbox" id="S2_x0020_Q1_x0020_R"></td>
+                            <td><input type="text" id="t2q1c" class="comments view"></td>
+                            </td>
+                            <td><input type="date" id="t2q1d" class="date view"></td>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td> Confirm pipe is PSL-2 (for API 5L pipe)</td>
+                            <td class="requiredbox view"><input type="checkbox" id="S2Q2R"></td>
+                            <td><input type="text" id="t2q2c" class="comments view"></td>
+                            </td>
+                            <td><input type="date" id="t2q2d" class="date view"></td>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="5">
+                                <h5>Step 3: Confirm Pipe Type (GP 18-87-01, Section 4. 6)</h5>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td>Check to determine the manufacturing process of the pipe: ERW, DSAW, SMLS, etc
+                                <ul>
+                                    <li> Project driven criteria, SMLS preferred for induction bends </li>
+                                </ul>
+                            </td>
+                            <td class="requiredbox view"><input type="checkbox" id="S3Q1R"></td>
+                            <td><input type="text" id="t3q1c" class="comments view"></td>
+                            </td>
+                            <td><input type="date" id="t3q1d" class="date view"></td>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td> Check delivery condition of the pipe.
+                                <ul>
+                                    <li> Grades ≥ X52 should be Q (Quenched and Tempered) for SMLS, or M
+                                        (Thermomechanical Rolled) for ERW and DSAW. </li>
+                                </ul>
+                            </td>
+                            <td class="requiredbox"><input type="checkbox" id="S3Q2R"></td>
+                            <td><input type="text" id="t3q2c" class="comments"></td>
+                            </td>
+                            <td><input type="date" id="t3q2d" class="date"></td>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="5">
+                                <h5>Step 4: Confirm Pipe Dimensions (GP 18-87-01, Section 4. 3) and 4)</h5>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td>Do the dimensions meet the project requirements?
+                            </td>
+                            <td class="requiredbox view"><input type="checkbox" id="S4Q1R"></td>
+                            <td><input type="text" id="t4q1c" class="comments view"></td>
+                            </td>
+                            <td><input type="date" id="t4q1d" class="date view"></td>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="5">
+                                <h5>Step 5: Confirm Pipe Chemistry (GP 18-87-01, Section 6)</h5>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td>Does the chemistry meet the grade and product requirements?
+                                <ul>
+                                    <li> API 5L, PSL-2 requirements as modified by Table 1 of GP 18-87-01</li>
+                                </ul>
+                            </td>
+                            <td class="requiredbox view"><input type="checkbox" id="S5Q1R"></td>
+                            <td><input type="text" id="t5q1c" class="comments view"></td>
+                            </td>
+                            <td><input type="date" id="t5q1d" class="date view"></td>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>Confirm pipe CE:
+                                <ul>
+                                    <li> Select CE equation based on Carbon content or if pipe is to be used in Canada,
+                                        compare calculated result to GP 18-87-01, Section 6. 1) b), c), or d).</li>
+                                </ul>
+                            </td>
+                            <td class="requiredbox view"><input type="checkbox" id="S5Q2R"></td>
+                            <td><input type="text" id="t5q2c" class="comments view"></td>
+                            </td>
+                            <td><input type="date" id="t5q2d" class="date view"></td>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="5">
+                                <h5>Step 6: Confirm Pipe Grade and Test Results (GP 18-87-01, Section 7.1)</h5>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td> Does the grade meet the project requirements?
+                            </td>
+                            <td class="requiredbox view"><input type="checkbox" id="S6Q1R"></td>
+                            <td><input type="text" id="t6q1c" class="comments view"></td>
+                            </td>
+                            <td><input type="date" id="t6q1d" class="date view"></td>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td> Do the tensile test results meet the required YS and UTS?
+                                <ul>
+                                    <li> Max UTS shall be SMTS +25ksi (also a suggested best practice from a welding
+                                        standpoint).</li>
+                                    <li> Max yield-to-tensile ratio shall be less than or equal to 0.90.</li>
+                                </ul>
+                            </td>
+                            <td class="requiredbox view"><input type="checkbox" id="S6Q2R"></td>
+                            <td><input type="text" id="t6q2c" class="comments view"></td>
+                            </td>
+                            <td><input type="date" id="t6q2d" class="date view"></td>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>3</td>
+                            <td>Is the pipe Grade X65 or higher? If so, contact Materials and Corrosion Engineer to
+                                discuss applicability and welding.</td>
+                            <td class="requiredbox view"><input type="checkbox" id="S6Q3R"></td>
+                            <td><input type="text" id="t6q3c" class="comments view"></td>
+                            </td>
+                            <td><input type="date" id="t6q3d" class="date view"></td>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="5">
+                                <h5>Step 7: Charpy v-Notch Test Results, if required (GP 18-87-01, Section 7.2)</h5>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td> Pipe body and/or HFW weld centerline CVN testing shall be performed if one or more of
+                                the following criteria are met:
+                                <ol type="a">
+                                    <li> Specified Maximum Operating Pressure (MOP) will result in a stress greater than
+                                        30% Specified Minimum Yield Strength (SMYS).</li>
+                                    <li> Minimum design temperature is below −20 °F (−29 °C).</li>
+                                    <li> Pipe will be installed at a water crossing or under a road or railroad (unless
+                                        installed with a cased crossing).</li>
+                                </ol>
+                                <em>*Note pipe dimensions may prohibit the ability to generate CVN specimens if they are
+                                    outside of the diameter/wall thickness combinitons listed in Table 22 of API 5L
+                                    (copied in the appendix). In this case CVNs are not required.</em>
+                            </td>
+                            <td class="requiredbox view"><input type="checkbox" id="S7Q1R"></td>
+                            <td><input type="text" id="t7q1c" class="comments view"></td>
+                            </td>
+                            <td><input type="date" id="t7q1d" class="date view"></td>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>Compare results to GP 18-87-01, Table 3 and 4, based on product type, Liquid or Gas,
+                                respectively.
+                            </td>
+                            <td class="requiredbox view"><input type="checkbox" id="S7Q2R"></td>
+                            <td><input type="text" id="t7q2c" class="comments view"></td>
+                            </td>
+                            <td><input type="date" id="t7q2d" class="date view"></td>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>3</td>
+                            <td>Were the CVNs performed at an appropriate temperature given the service environment?
+                                <ul>
+                                    <li> Project driven CVN temperature criteria (32 °F sufficient for underground and
+                                        Gulf Coast region, lower temperatures required for above ground, colder climate
+                                        applications. Pipe used for induction bends need to meet CVN requirements at
+                                        14°F as part of the bend qualification.)</li>
+                                </ul>
+                            </td>
+                            <td class="requiredbox view"><input type="checkbox" id="S7Q3R"></td>
+                            <td><input type="text" id="t7q3c" class="comments view"></td>
+                            </td>
+                            <td><input type="date" id="t7q3d" class="date view"></td>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="5">
+                                <h5>Step 8: Signatures and Distribution</h5>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <div class="card mb-4 bg-light">
+                    <div class="card-body">
+                        <h5>Form completed by:</h5>
+                        <div class="row">
+
+                            <div class="col-md-4 form-group">
+                                <label class="col-form-label">Name:</label>
+                                <input type="text" class="form-control view"   id="s8name"  aria-label="Default select example">
+
+                            </div>
+
+                            <div class="col-md-4 form-group">
+                                <label class="col-form-label">Date: </label>
+                                <input type="date" class="form-control view date"  id="s8date"  aria-label="Default select example" >
+
+                            </div>
+                        </div>
+                        <h5>Distribution: </h5>
+                        <ul>
+                            <li> Post to LAN project Folder </li>
+                            <li> Send approval to the vendor </li>
+                            <li> Send copy of this form and associated attachments to the Tech Leader (or other
+                                appropriate field rep) so they can confirm correct items are delivered to the field. If
+                                P&C project, send copy to P&C Quality Lead </li>
+                            <li> Include in facility asset records as appropriate / where required </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <h5>Appendix: Table 22 from API 5L</h5>
+                <img src="https://ishareteam3.na.xom.com/sites/eamp/SiteAssets/Images/table22.png">
+
+                <!-- Button trigger modal -->
+
+                <div class="card-footer mb-4 text-center">
+                    <button type="button" id="request" class="btn btn-primary">
+                        Save
+                    </button>
+                </div>
+
+            </div>
+            <!-- END MAIN -->
+        </div>
+
+
+     <!-- Modal -->
+ <div id="exampleModalCenter" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+ aria-hidden="true">
+ <div class="modal-dialog modal-dialog-centered" role="document">
+     <div class="modal-content">
+         <div class="modal-header">
+             <h5 class="modal-title" id="exampleModalLongTitle">Congratulations</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <a href="https://ishareteam3.na.xom.com/sites/eamp/MTRWebPartPage/BU%20Request.aspx"><span aria-hidden="true">&times;</span></a>
+             </button>
+         </div>
+         <div class="modal-body icon">
+             <i class="fa fa-check-square" style="font-size:48px;color:green"></i>
+         </div>
+         <p style="text-align:center">Your data has been saved successfully</p>
+         <div class="modal-footer">
+             <a class="btn btn-primary" href="https://ishareteam3.na.xom.com/sites/eamp/MTRWebPartPage/BU%20Request.aspx">Okay</a>
+         </div>
+     </div>
+ </div>
+</div>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
+		
+		 <script type="text/javascript">
+	//	  <!-- Global Variables -->
+		  
+		  function getQueryString() {
+          var key = false, res = {}, itm = null;
+          // get the query string without the ?
+          var qs = location.search.substring(1);
+          // check for the key as an argument
+          if (arguments.length > 0 && arguments[0].length > 1)
+            key = arguments[0];
+          // make a regex pattern to grab key/value
+          var pattern = /([^&=]+)=([^&]*)/g;
+          // loop the items in the query string, either
+          // find a match to the argument, or build an object
+          // with key/value pairs
+            while (itm = pattern.exec(qs)) {
+            if (key !== false && decodeURIComponent(itm[1]) === key)
+            return decodeURIComponent(itm[2]);
+            else if (key === false)
+              res[decodeURIComponent(itm[1])] = decodeURIComponent(itm[2]);
+          }
+
+          return key === false ? res : null;
+    }
+    queryParam = getQueryString();
+    var buid = queryParam.BUID;
+   
+    queryParams = getQueryString();
+    var mode = queryParams.Mode;
+
+   queryParam = getQueryString();
+    var itemid = queryParam.BUID;
+	
+//  <!-- Get ValueByID Function -->
+		  function getvalue(id) {
+                 var ele = $("#"+ id+"");
+                var type = ele[0].nodeName.toLowerCase();
+                switch (type) {
+                    case "input":
+                        return ele.val();
+                        break;
+                    case "select":
+                        return $(":selected", ele).val()
+                        break;
+                }
+            }
+	
+//	 <!-- Get/Fetch FormData Function -->
+	        function getformdata(metadata) {
+                var data = {};
+
+                data.__metadata = metadata;   
+                data.BUIDId = parseInt(buid);
+                data.Title = getvalue("ptitle");
+                data.i2zg = getvalue("facility");
+                data.m4ux = getvalue("pnumber");
+                data.i3ha = getvalue("pmanager");
+                data.nluk = getvalue("mdate");
+                data.mpby = getvalue("heatnumber");
+                data.os8v = getvalue("pdescription");
+                data.Signature = getvalue("signature");
+
+                data.kk2l = getvalue("t1q1c");
+                data.mutt = getvalue("t1q1d");
+                data.fv3s = getvalue("t1q2c");
+                data.yxux = getvalue("t1q2d");
+
+                data.S2_x0020_Q1_x0020_C = getvalue("t2q1c");
+                data.S2Q1D = getvalue("t2q1d");
+                data.S2Q2C = getvalue("t2q2c");
+                data.S2Q2D = getvalue("t2q2d");
+
+                data.S3Q1C = getvalue("t3q1c");
+                data.S3Q1D = getvalue("t3q1d");
+                data.S3Q2C = getvalue("t3q2c");
+                data.S3Q2D = getvalue("t3q2d");
+
+                data.S4Q1C = getvalue("t4q1c");
+                data.S4Q1D = getvalue("t4q1d");
+
+                data.S5Q1C = getvalue("t5q1c");
+                data.S5Q1D = getvalue("t5q1d");
+                data.S5Q2C = getvalue("t5q2c");
+                data.S5Q2D = getvalue("t5q2d");
+       
+                data.S6Q1C = getvalue("t6q1c");
+                data.S6Q1D = getvalue("t6q1d");
+                data.S6Q2C = getvalue("t6q2c");
+                data.S6Q2D = getvalue("t6q2d");
+                data.S6Q3C = getvalue("t6q3c");
+                data.S6Q3D = getvalue("t6q3d");
+
+                data.S7Q1C = getvalue("t7q1c");
+                data.S7Q1D = getvalue("t7q1d");
+                data.S7Q2C = getvalue("t7q2c");
+                data.S7Q2D = getvalue("t7q2d");
+                data.S7Q3C = getvalue("t7q3c");
+                data.S7Q3D = getvalue("t7q3d");
+
+                data.S8Name = getvalue("s8name");
+                data.S8Date= getvalue("s8date");
+               $(".table [type=checkbox]").each(function(i,e){
+               data[$(e).attr("id")]= $(e)[0].checked?"on":"off"
+              })
+                console.log(data,"checkbox data")
+                return JSON.stringify(data);
+            }
+			    
+    //    <!-- GetListItemById Function -->
+	    function GetListItemById() {
+		var Itemid = FormID;
+		$.ajax
+        ({
+            url: _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getByTitle('0730')/items(" + Itemid + ")",
+            method: "GET",
+            headers:
+               {
+                   "Accept": "application/json;odata=verbose"
+               },
+            success: function (data, status, xhr) {
+                var dataresults = data.d;
+                console.log(dataresults);
+				buid=dataresults.BUIDId;
+				document.getElementById('ptitle').value=dataresults.Title;
+				document.getElementById('facility').value=dataresults.i2zg;
+				document.getElementById('pnumber').value=dataresults.m4ux;
+				document.getElementById('pmanager').value=dataresults.i3ha;
+				document.getElementById('mdate').value=(dataresults.nluk?dataresults.nluk.slice(0,10):"");
+				document.getElementById('heatnumber').value=dataresults.mpby;
+				document.getElementById('pdescription').value=dataresults.os8v;
+                                document.getElementById('signature').value=dataresults.Signature;  
+
+                                if(dataresults.puxw === "on"){
+                                document.getElementById('puxw').checked = true;
+                                }
+				document.getElementById('t1q1c').value=dataresults.kk2l; 
+				document.getElementById('t1q1d').value=(dataresults.mutt?dataresults.mutt.slice(0,10):""); 
+                                if(dataresults.x9y2 === "on"){
+                                document.getElementById('x9y2').checked = true;
+                                }
+				document.getElementById('t1q2c').value=dataresults.fv3s; 
+				document.getElementById('t1q2d').value=(dataresults.yxux?dataresults.yxux.slice(0,10):"");
+
+                                 if(dataresults.S2_x0020_Q1_x0020_R === "on"){
+                                document.getElementById('S2_x0020_Q1_x0020_R').checked = true;
+                                }
+				document.getElementById('t2q1c').value=dataresults.S2_x0020_Q1_x0020_C; 
+				document.getElementById('t2q1d').value=(dataresults.S2Q1D?dataresults.S2Q1D.slice(0,10):""); 
+                                 if(dataresults.S2Q2R === "on"){
+                                document.getElementById('S2Q2R').checked = true;
+                                }
+				document.getElementById('t2q2c').value=dataresults.S2Q2C; 
+				document.getElementById('t2q2d').value=(dataresults.S2Q2D?dataresults.S2Q2D.slice(0,10):""); 
+                                 if(dataresults.S3Q1R === "on"){
+                                document.getElementById('S3Q1R').checked = true;
+                                }
+				document.getElementById('t3q1c').value=dataresults.S3Q1C; 
+				document.getElementById('t3q1d').value=(dataresults.S3Q1D?dataresults.S3Q1D.slice(0,10):""); 
+                                 if(dataresults.S3Q2R === "on"){
+                                document.getElementById('S3Q2R').checked = true;
+                                }
+				document.getElementById('t3q2c').value=dataresults.S3Q2C; 
+				document.getElementById('t3q2d').value=(dataresults.S3Q2D?dataresults.S3Q2D.slice(0,10):""); 
+
+                                    if(dataresults.S4Q1R === "on"){
+                                document.getElementById('S4Q1R').checked = true;
+                                }
+				document.getElementById('t4q1c').value=dataresults.S4Q1C;
+				document.getElementById('t4q1d').value=(dataresults.S4Q1D?dataresults.S4Q1D.slice(0,10):""); 
+
+                                 if(dataresults.S5Q1R === "on"){
+                                document.getElementById('S5Q1R').checked = true;
+                                }
+				document.getElementById('t5q1c').value=dataresults.S5Q1C; 
+				document.getElementById('t5q1d').value=(dataresults.S5Q1D?dataresults.S5Q1D.slice(0,10):""); 
+                                  if(dataresults.S5Q2R === "on"){
+                                document.getElementById('S5Q2R').checked = true;
+                                }
+				document.getElementById('t5q2c').value=dataresults.S5Q2C; 
+				document.getElementById('t5q2d').value=(dataresults.S5Q2D?dataresults.S5Q2D.slice(0,10):""); 
+
+                                   if(dataresults.S6Q1R === "on"){
+                                document.getElementById('S6Q1R').checked = true;
+                                }
+				document.getElementById('t6q1c').value=dataresults.S6Q1C; 
+				document.getElementById('t6q1d').value=(dataresults.S6Q1D?dataresults.S6Q1D.slice(0,10):""); 
+                                   if(dataresults.S6Q2R === "on"){
+                                document.getElementById('S6Q2R').checked = true;
+                                }
+				document.getElementById('t6q2c').value=dataresults.S6Q2C; 
+				document.getElementById('t6q2d').value=(dataresults.S6Q2D?dataresults.S6Q2D.slice(0,10):""); 
+		
+                                  if(dataresults.S6Q3R === "on"){
+                                document.getElementById('S6Q3R').checked = true;
+                                }
+				document.getElementById('t6q3c').value=dataresults.S6Q3C; 
+				document.getElementById('t6q3d').value=(dataresults.S6Q2D?dataresults.S6Q3D.slice(0,10):""); 
+
+	
+                                if(dataresults.S7Q1R === "on"){
+                                document.getElementById('S7Q1R').checked = true;
+                                }
+				document.getElementById('t7q1c').value=dataresults.S7Q1C; 
+				document.getElementById('t7q1d').value=(dataresults.S7Q1D?dataresults.S7Q1D.slice(0,10):""); 
+	
+                                   if(dataresults.S7Q2R === "on"){
+                                document.getElementById('S7Q2R').checked = true;
+                                }
+				document.getElementById('t7q2c').value=dataresults.S7Q2C; 
+				document.getElementById('t7q2d').value=(dataresults.S7Q2D?dataresults.S7Q2D.slice(0,10):""); 
+		
+                                    if(dataresults.S7Q3R === "on"){
+                                document.getElementById('S7Q3R').checked = true;
+                                }
+				document.getElementById('t7q3c').value=dataresults.S7Q3C; 
+				document.getElementById('t7q3d').value=(dataresults.S7Q3D?dataresults.S7Q2D.slice(0,10):""); 
+
+				document.getElementById('s8name').value=dataresults.S8Name; 
+				document.getElementById('s8date').value=(dataresults.S8Date?dataresults.S8Date.slice(0,10):""); 
+            },
+            error: function (xhr, status, error) {
+                console.log("Failed");
+            }
+        });
+}
+
+ //    <!--Fetching BURequest Data -->
+   $(document).ready(function(){
+            function ajaxget(url){
+                $.ajax({
+                    type: "GET",
+                    url : url,
+                    headers: {
+                    "accept":"application/json; odata=verbose"
+                      },
+                    success: function(data){
+                    console.log(data, "data");
+                    var items = data.d.results;
+                    var filteredItem = items.filter(function (itm) {
+                    return  itm.ID == itemid 
+                        });
+                $('#facility').val(filteredItem[0].Facility_x002f_Terminal);
+                $('#ptitle').val(filteredItem[0].Title);
+                $('#pnumber').val(filteredItem[0].pm5x);
+                $('#pmanager').val(filteredItem[0].Project_x0020_Manager.Title);
+                $('#pdescription').val(filteredItem[0].Product_x0020_Description);
+                console.log(filteredItem,"Filtered BUitem")
+                    },
+                    error: function(error){
+                     alert("error");
+                    }
+                });
+            } 
+ ajaxget(_spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('BU Request list')/items?$top=5000&$expand=yjsk,Project_x0020_Manager&$select=*,yjsk/Title,Project_x0020_Manager/Title");
+       });
+
+        //    <!-- GetListItem ByID Calling -->
+            if (buid==null){
+    queryParam1 = getQueryString();
+    var FormID = queryParam1.FormID;
+        GetListItemById();
+	console.log(FormID);
+                       }
+	        
+//	  <!-- Save/Post Form Functionality -->
+            function saveform() {
+                var metadata = { 'type': 'SP.Data.Pl730DataListItem' }
+                var data1 = getformdata(metadata);
+                console.log(data1);
+
+                jQuery.ajax({
+                    url: _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('0730')/items?$select=Id",
+                    type: "POST",
+                    data: data1,
+                    headers: {
+                        "X-HTTP-Method": "POST",
+                        "accept": "application/json;odata=verbose",
+                        "content-type": "application/json;odata=verbose",
+                        "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                        "IF-MATCH": "*"
+                    },
+                    success: function () {
+                        console.log("success");
+                        $('.modal').addClass('show').show().addClass("background")
+                    },
+                    error: function (xhr, status, error) { console.log(status); console.log(error); alert("Error while Save please check the data ones again"); }
+                });
+            }
+
+       //   <!-- Update/Edit Form Functionality -->
+          function updateform() {
+                var metadata = { 'type': 'SP.Data.Pl730DataListItem' }
+                var data1 = getformdata(metadata);
+                console.log(data1);
+                   jQuery.ajax({
+                    url: _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getByTitle('0730')/items(" + FormID + ")",
+                    type: "POST",
+                    data: data1,
+                    headers: {
+                        "X-HTTP-Method": "PATCH",
+                        "accept": "application/json;odata=verbose",
+                        "content-type": "application/json;odata=verbose",
+                        "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                        "IF-MATCH": "*"
+                    },
+                    success: function () {
+                        console.log("success");
+                        $('.modal').addClass('show').show().addClass("background")
+                    },
+                    error: function (xhr, status, error) { console.log(status); console.log(error); alert("Error while Save please check the data ones again"); }
+                });
+            }
+
+
+   <!-- Readonly Functionality -->
+			
+			if (mode == "View"){
+			$(".view").each(function(i,e){
+			$(e).attr("readonly",true)
+			})
+			$("input[type='checkbox']").each(function(i,e){
+			$(e).attr("disabled","disabled")
+			})
+			}
+			
+
+ <!-- Date Change Functionality -->
+		   
+            $(".date-1").change(function () {
+                var date = $(this).val()
+                $('.date').each(function () {
+                    $(this).val(date)
+                })
+            })
+			
+			
+ <!-- Save Form Calling -->
+ 
+			if(mode == "New"){
+			$("#request").click(function (e) {
+			saveform(e);
+            });
+            }
+			
+			
+  <!-- Update Form Calling -->
+		   
+		   if (mode == "Edit"){
+		   $("#request").click(function (e) {
+		   updateform();
+		   });
+           }
+		   
+  <!-- Copy Form Calling -->
+		   
+			if(mode == "Copy"){
+			$("#request").click(function (e) {
+			saveform(e);
+            });
+            }
+
+    <!-- New View Form Calling -->
+		   
+			if(mode == "NewView"){
+			$("#request").hide();
+            }				   
+		
+</script>		
+<script src=https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js></script>
+ <script>
+ $("#pageTitle").hide();</script>
+</body>
+</html>
