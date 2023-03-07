@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MTR Workflow</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.6.1.js"  integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous" 
+  type="text/javascript" ></script>
+<style>
+
+.background{
+position:fixed;
+height:100vh;
+width:100vw;
+background-color: rgba(0, 0, 0, 0.75);
+backdrop-filter: blur(15px);
+top:0;
+left:0;
+}
+ 
+ .selector-for-some-widget {
+            box-sizing: content-box;
+        }
+        .icon {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+.navbar2{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+</style>
+</head>
+<body>
+     
+  <!-- Navbar -->
+<form id="mainform" style="position:relative">
+    <div class="w3-main nosidebar">
+      <div class="w3-row ">
+        <div class="w3-container">
+		  <div class="navbar2">
+          <h4 class="page-title"><i class="fa fa-check-square-o view"></i> Materials and Corrosion Requirements Checklist:</h4>
+		  <div>
+		   <i class="fa fa-file-pdf-o" onclick="window.print()" style="color:red;font-size:48px;"></i>
+		  </div></div>
+          <hr />        
+  <div class="card mb-4 bg-light">
+  <div class="card-body">
+  <div class="row">
+                    <div class="col-md-4 form-group">
+                      <label class="col-form-label">Facility/Terminal:</label> 
+                        <input type="number" id="facility" class="form-control view" aria-label="Default select example">
+                          
+                    </div>
+  
+   <div class="col-md-4 form-group">
+                      <label class="col-form-label">Project Title: </label> 
+                        <input type="text" id="ptitle" class="form-control view" aria-label="Default select example" ViewMode>
+                          
+                    </div>
+  
+   <div class="col-md-4 form-group">
+                      <label class="col-form-label">Project Number:</label> 
+                        <input type="number" id="pnumber" class="form-control view" aria-label="Default select example">
+                          
+                    </div>
+  
+   <div class="col-md-4 form-group">
+                      <label class="col-form-label">Project Manager:</label> 
+                       <input type="text" id="pmanager" class="form-control view" aria-label="Default select example">
+                          
+                    </div>
+  
+   <div class="col-md-4 form-group">
+                      <label class="col-form-label">Project Manager Signature:</label> 
+                        <input type="text" id="signature" class="form-control view" aria-label="Default select example">
+                          
+                    </div>
+  
+   <div class="col-md-4 form-group">
+                      <label class="col-form-label">Date:</label> 
+                        <input type="date" id="mdate" class="form-control date-1 view" aria-label="Default select example">
+                          
+                    </div>
+  
+  
+  
+  </div></div></div>
+    <p>The embedded checklists provide a list of considerations when executing a project within EMPCo. They are meant to provide the user a list of applicable GPs and Manuals, as well as, best practices to follow when performing the tasks below.</p>
+  <h4 class="page-title"><i class="fa fa-code-fork view"></i> Induction Bends : PL-0729</h4>
+          <hr />
+   
+   
+  <table class="table table-bordered mb-4">
+  <thead>
+  <tr><th colspan="4">This checklist aids the user in determining the Materials and Corrosion requirements when purchasing an induction bend.</th></tr>
+  <tr>
+  <th width="8%">SL.No</th>
+  <th width="52%">Task or Consideration</th>
+  <th width="8%">Required</th>
+  <th width="25%">Comments</th>
+  <th width="15%">Date Completed</th> 
+   
+  </thead>
+  
+  <tbody>
+  <tr>
+      <td></td>
+  <td colspan="4" class="font-weight-bold view">Procure Mother Line Pipe from Qualified Mill</td>
+  
+  </tr>
+  <tr> 
+      <td>1</td>
+  <td><h6>Line Pipe per <a href="">GP 18-87-01</a> for stockist orders, <a href="">GP 29-01-05</a> for larger orders:</h6></td>
+   <td class="requiredbox view"><input type="checkbox" id="r8cu" style="margin-left:auto; margin-right:auto;"></td>
+  <td> <input type="text" id="t1q1c" class="comments view"></td>
+  <td><input type="date" id="t1q1d" class="date view"></td> 
+  </tr>
+  
+  <tr>
+ 
+  <td>1.1</td>
+  <td> Procure line pipe from an approved manufacturer that is Product Specification Level 2 (PSL 2) and meets GP requirements: See MTR review checklist:<a href="">PL-0729</a> </td>
+  <td class="requiredbox view"><input type="checkbox" id="ot6s" style="margin-left:auto; margin-right:auto;"></td>
+  <td> <input type="text" id="t1q2c"  class="comments view"></td>
+  <td><input type="date" id="t1q2d" class="date view"></td> 
+  </tr>
+  
+  <tr>
+  <td>1.2</td>
+  <td> Pipe manufacturing method in order of preference for HDDs: Seamless, ERW, DSAW (only for large diameters)</td>
+  <td class="requiredbox view"><input type="checkbox" id="Task1_x0020_Q3R"></td>
+  <td> <input type="text" id="t1q3c" class="comments view"></td>
+  <td><input type="date" id="t1q3d" class="date view"></td> 
+  </tr>
+  
+  <tr>
+  <td>1.3</td>
+  <td> Induction bender should approve mother pipe MTR to make sure the pipe is appropriate. </td>
+  <td class="requiredbox view"><input type="checkbox" id="Task_x0020_1_x0020_Q4R"></td>
+  <td> <input type="text" class="comments view" id="t1q4c"></td>
+  <td><input type="date" class="date view" id="t1q4d"></td> 
+  </tr>
+  
+  <tr>
+      <td></td>
+  <td colspan="4" class="font-weight-bold view">Procure Induction Bends</td>
+  
+  </tr>
+  <tr>
+      <td>2</td>
+  <td><h6>Induction Bends should be manufactured to <a href="">GP 29-01-06</a>  and <a href="">ASME B16.49:</a></h6></td>
+   <td class="requiredbox view"><input type="checkbox" style="margin-left:auto; margin-right:auto;"  id="Task_x0020_2_x0020_Q1R"></td>
+  <td> <input type="text" class="comments view" id="t2q1c"></td>
+  <td><input type="date" class="date view" id="t2q1d"></td> 
+  </tr>
+  
+  <tr>
+  <td>2.1</td>
+  <td> Choose qualified vendor from the <a href="">Qualified Manufacture’s List:</a> American Pipe Bending, Inc. (Tulsa, Oklahoma), McDermott (formally CB&I, Walker, Louisiana and Clearfield, Utah), BendTec (Duluth, Minnesota)</td>
+  <td class="requiredbox view"><input type="checkbox"  id="Task_x0020_2_x0020_Q2R"></td>
+  <td> <input type="text" class="comments view"  id="t2q2c"></td>
+  <td><input type="date" class="date view"  id="t2q2d"></td> 
+  </tr>
+  
+  <tr>
+  <td>2.2</td>
+  <td>Be prepared to supply induction bender with bare (uncoated) pipe from line pipe order</td>
+  <td class="requiredbox view"><input type="checkbox" id="Task_x0020_2_x0020_Q3R"></td>
+  <td> <input type="text" class="comments view" id="t2q3c"></td>
+  <td><input type="date" class="date view" id="t2q3d"></td> 
+  </tr>
+  
+  <tr>
+  <td>2.3</td>
+  <td> Determine if qualification test bend is required based on past qualifications performed by bender: confirm proposed qualification test bend and production bends fall within essential variable ranges in <a href="">ASME B16.49</a> , Table 3 and <a href="">GP 29-01-06</a> , SR15.8.2.
+  (Qualification test bend is a sacrificial bend used to ensure proper mechanical properties remain after the bending process.)
+  </td>
+  <td class="requiredbox view"><input type="checkbox" id="Task_x0020_2_x0020_Q4R"></td>
+  <td> <input type="text" class="comments view" id="t2q4c"></td>
+  <td><input type="date" class="date view" id="t2q4d"></td> 
+  </tr>
+  
+  <tr>
+  <td>2.4</td>
+  <td> Chemical composition of qualification bends compared to the production bend(s) need to be within the requirements of <a href="">ASME B16.49</a> , Table 2 (and applicable GP section).
+  </td>
+  <td class="requiredbox view"><input type="checkbox" id="Task_x0020_2_x0020_Q5R"></td>
+  <td> <input type="text" class="comments view" id="t2q5c"></td>
+  <td><input type="date" class="date view" id="t2q5d"></td> 
+  </tr>
+  
+  <tr>
+      <td></td>
+  <td colspan="4" class="font-weight-bold">Field Considerations</td>
+  
+  </tr> 
+  
+  <tr>
+  <td>3</td>
+  <td> If the adjoining pipes have unequal OD or WT with a difference greater than 3/32 inch, then follow the requirements of <a href="">ASME B31.4</a> , Figure 434.8.6-2.
+  (NOTE: some induction bend fabricators have the ability to bevel the pipe after bending using “pipe facing” equipment.  This can save field execution time and produce a high quality bevel.)
+  </td>
+  <td class="requiredbox view"><input type="checkbox" id="Task_x0020_3_x0020_Q1R"></td>
+  <td> <input type="text" class="comments view" id="t3q1c"></td>
+  <td><input type="date" class="date view" id="t3q1d"></td> 
+  </tr>
+  
+  <tr>
+  <td>3.1</td>
+  <td> Tangent lengths on induction bends should be utilized in design and construction. </td>
+  <td class="requiredbox view"><input type="checkbox" id="Task_x0020_3_x0020_Q2R"></td>
+  <td> <input type="text" class="comments view" id="t3q2c"></td>
+  <td><input type="date" class="date view" id="t3q2d"></td> 
+  </tr>
+  
+  <tr>
+  <td>3.2</td>
+  <td>Bend should be ordered as a Segmental Bend if tangents need to be cut off or bend cut into multiple smaller bends. Additional dimensional requirements provided in <a href="">ASME B16.49</a>, SR15.3. </td>
+  <td class="requiredbox view"><input type="checkbox" id="Task_x0020_3_x0020_Q3R"></td>
+  <td> <input type="text" class="comments view" id="t3q3c"></td>
+  <td><input type="date" class="date view" id="t3q3d"></td> 
+  </tr>
+  
+  </tbody>
+  </table> 
+  
+            <div class="card-footer mb-4 text-center">
+              <button id="request" type="submit" class="btn btn-primary" >Save</button>
+      
+            </div> 
+   
+  
+      <!-- END MAIN -->
+    </div>
+        </div>
+      </div>
+</form>
+ 
+ 
+
+ <!-- Modal -->
+ <div id="exampleModalCenter" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+ aria-hidden="true">
+ <div class="modal-dialog modal-dialog-centered" role="document">
+     <div class="modal-content">
+         <div class="modal-header">
+             <h5 class="modal-title" id="exampleModalLongTitle">Congratulations</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <a href="https://ishareteam3.na.xom.com/sites/eamp/MTRWebPartPage/BU%20Request.aspx"><span aria-hidden="true">&times;</span></a>
+             </button>
+         </div>
+         <div class="modal-body icon">
+             <i class="fa fa-check-square" style="font-size:48px;color:green"></i>
+         </div>
+         <p style="text-align:center">Your data has been saved successfully</p>
+         <div class="modal-footer">
+             <a class="btn btn-primary" href="https://ishareteam3.na.xom.com/sites/eamp/MTRWebPartPage/BU%20Request.aspx">Okay</a>
+         </div>
+     </div>
+ </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+  <!-- Global Variables -->
+		
+		    <!-- Global Variables -->
+		  
+		  function getQueryString() {
+          var key = false, res = {}, itm = null;
+          // get the query string without the ?
+          var qs = location.search.substring(1);
+          // check for the key as an argument
+          if (arguments.length > 0 && arguments[0].length > 1)
+            key = arguments[0];
+          // make a regex pattern to grab key/value
+          var pattern = /([^&=]+)=([^&]*)/g;
+          // loop the items in the query string, either
+          // find a match to the argument, or build an object
+          // with key/value pairs
+            while (itm = pattern.exec(qs)) {
+            if (key !== false && decodeURIComponent(itm[1]) === key)
+            return decodeURIComponent(itm[2]);
+            else if (key === false)
+              res[decodeURIComponent(itm[1])] = decodeURIComponent(itm[2]);
+          }
+
+          return key === false ? res : null;
+    }
+    queryParam = getQueryString();
+    var buid = queryParam.BUID;
+   
+    queryParams = getQueryString();
+    var mode = queryParams.Mode;
+
+ 
+<!-- Get ValueByID Function -->
+		  function getvalue(id) {
+                 var ele = $("#"+ id+"");
+                var type = ele[0].nodeName.toLowerCase();
+                switch (type) {
+                    case "input":
+                        return ele.val();
+                        break;
+                    case "select":
+                        return $(":selected", ele).val()
+                        break;
+                }
+            }
+
+ <!-- Get/Fetch FormData Function -->
+ 
+function getformdata(metadata){
+var data = {};
+data.__metadata = metadata;
+//data.BU_x0020_RequestId =parseInt(buid);   
+data.BUIDId =parseInt(buid);   
+data.Title= getvalue("ptitle");
+data.Facility_x002f_Terminal= getvalue("facility");
+data.Project_x0020_Number=getvalue("pnumber");
+data.Project_x0020_Manager=getvalue("pmanager");
+data.orcn=getvalue("mdate");
+data.Signature=getvalue("signature");
+
+//data.r8cu=getvalue("t1q1r");
+data.efbz=getvalue("t1q1c");
+data.tmxn=getvalue("t1q1d");
+//data.ot6s=getvalue("t1q2r");
+data.wo8a=getvalue("t1q2c");
+data.Task1_Q2D=getvalue("t1q2d");
+//data.Task1_x0020_Q3R=getvalue("t1q3r");
+data.q5hi=getvalue("t1q3c");
+data.wfgm=getvalue("t1q3d");
+//data.Task_x0020_1_x0020_Q4R=getvalue("t1q4r");
+data.Task_x0020_1_x0020_Q4C=getvalue("t1q4c");
+data.Task_x0020_1_x0020_Q4D=getvalue("t1q4d");
+
+//data.Task_x0020_2_x0020_Q1R=getvalue("t2q1r");
+data.Task_x0020_2_x0020_Q1C=getvalue("t2q1c");
+data.Task_x0020_2_x0020_Q1D=getvalue("t2q1d");
+//data.Task_x0020_2_x0020_Q2R=getvalue("t2q2r");
+data.Task_x0020_2_x0020_Q2C=getvalue("t2q2c");
+data.Task_x0020_2_x0020_Q2D=getvalue("t2q2d");
+//data.Task_x0020_2_x0020_Q3R=getvalue("t2q3r");
+data.Task_x0020_2_x0020_Q3C=getvalue("t2q3c");
+data.Task_x0020_2_x0020_Q3D=getvalue("t2q3d");
+//data.Task_x0020_2_x0020_Q4R=getvalue("t2q4r");
+data.Task_x0020_2_x0020_Q4C=getvalue("t2q4c");
+data.Task_x0020_2_x0020_Q4D=getvalue("t2q4d");
+//data.Task_x0020_2_x0020_Q5R=getvalue("t2q5r");
+data.Task_x0020_2_x0020_Q5C=getvalue("t2q5c");
+data.Task_x0020_2_x0020_Q5D=getvalue("t2q5d");
+
+//data.Task_x0020_3_x0020_Q1R=getvalue("t3q1r");
+data.Task_x0020_3_x0020_Q1C=getvalue("t3q1c");
+data.Task_x0020_3_x0020_Q1D=getvalue("t3q1d");
+//data.Task_x0020_3_x0020_Q2R=getvalue("t3q2r");
+data.Task_x0020_3_x0020_Q2C=getvalue("t3q2c");
+data.Task_x0020_3_x0020_Q2D=getvalue("t3q2d");
+//data.Task_x0020_3_x0020_Q3R=getvalue("t3q3r");
+data.Task_x0020_3_x0020_Q3C=getvalue("t3q3c");
+data.Task_x0020_3_x0020_Q3D=getvalue("t3q3d");
+
+$(".table [type=checkbox]").each(function(i,e){
+data[$(e).attr("id")]= $(e)[0].checked?"on":"off"
+              })
+console.log(data,"checkbox data")
+
+	return JSON.stringify(data);
+}
+
+
+
+
+ <!-- GetListItemById Function -->
+ 
+function GetListItemById() {
+    var Itemid = FormID;
+ 
+    $.ajax
+        ({
+            url: _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getByTitle('0729')/items(" + Itemid + ")",
+            method: "GET",
+            headers:
+               {
+                   "Accept": "application/json;odata=verbose"
+               },
+            success: function (data, status, xhr) {
+                var dataresults = data.d;
+                console.log(dataresults);
+buid=dataresults.BUIDId;
+document.getElementById('ptitle').value=dataresults.Title;
+document.getElementById('facility').value=dataresults.Facility_x002f_Terminal;
+document.getElementById('pnumber').value=dataresults.Project_x0020_Number;
+document.getElementById('pmanager').value=dataresults.Project_x0020_Manager;
+document.getElementById('mdate').value=dataresults.orcn.slice(0,10);
+document.getElementById('signature').value=dataresults.Signature;
+
+
+//document.getElementById('r8cu').setAttribute("checked",dataresults.r8cu=="on"?true:false);
+if(dataresults.r8cu=== "on"){
+                                document.getElementById('r8cu').checked = true;
+                                }
+document.getElementById('t1q1c').value=dataresults.efbz;
+document.getElementById('t1q1d').value=dataresults.tmxn.slice(0,10);
+//document.getElementById('t1q2r').setAttribute("checked",dataresults.ot6s=="on"?true:false);
+if(dataresults.ot6s=== "on"){
+                                document.getElementById('ot6s').checked = true;
+                                }
+document.getElementById('t1q2c').value=dataresults.wo8a;
+document.getElementById('t1q2d').value=dataresults.Task1_Q2D.slice(0,10);
+//document.getElementById('t1q3r').setAttribute("checked",dataresults.Task1_x0020_Q3R=="on"?true:false);
+if(dataresults.Task1_x0020_Q3R=== "on"){
+                                document.getElementById('Task1_x0020_Q3R').checked = true;
+                                }
+document.getElementById('t1q3c').value=dataresults.q5hi;
+document.getElementById('t1q3d').value=dataresults.wfgm.slice(0,10);
+//document.getElementById('t1q4r').setAttribute("checked",dataresults.Task_x0020_1_x0020_Q4R=="on"?true:false);
+if(dataresults.Task_x0020_1_x0020_Q4R=== "on"){
+                                document.getElementById('Task_x0020_1_x0020_Q4R').checked = true;
+                                }
+document.getElementById('t1q4c').value=dataresults.Task_x0020_1_x0020_Q4C;
+document.getElementById('t1q4d').value=dataresults.Task_x0020_1_x0020_Q4D.slice(0,10);
+
+//document.getElementById('t2q1r').setAttribute("checked",dataresults.Task_x0020_2_x0020_Q1R=="on"?true:false);
+if(dataresults.Task_x0020_2_x0020_Q1R=== "on"){
+                                document.getElementById('Task_x0020_2_x0020_Q1R').checked = true;
+                                }
+document.getElementById('t2q1c').value=dataresults.Task_x0020_2_x0020_Q1C;
+document.getElementById('t2q1d').value=dataresults.Task_x0020_2_x0020_Q1D.slice(0,10);
+//document.getElementById('t2q2r').setAttribute("checked",dataresults.Task_x0020_2_x0020_Q2R=="on"?true:false);
+if(dataresults.Task_x0020_2_x0020_Q2R=== "on"){
+                                document.getElementById('Task_x0020_2_x0020_Q2R').checked = true;
+                                }
+document.getElementById('t2q2c').value=dataresults.Task_x0020_2_x0020_Q2C;
+document.getElementById('t2q2d').value=dataresults.Task_x0020_2_x0020_Q2D.slice(0,10);
+//document.getElementById('t2q3r').setAttribute("checked",dataresults.Task_x0020_2_x0020_Q3R=="on"?true:false);
+if(dataresults.Task_x0020_2_x0020_Q3R=== "on"){
+                                document.getElementById('Task_x0020_2_x0020_Q3R').checked = true;
+                                }
+document.getElementById('t2q3c').value=dataresults.Task_x0020_2_x0020_Q3C;
+document.getElementById('t2q3d').value=dataresults.Task_x0020_2_x0020_Q3D.slice(0,10);
+//document.getElementById('t2q4r').setAttribute("checked",dataresults.Task_x0020_1_x0020_Q4R=="on"?true:false);
+if(dataresults.Task_x0020_1_x0020_Q4R=== "on"){
+                                document.getElementById('Task_x0020_1_x0020_Q4R').checked = true;
+                                }
+document.getElementById('t2q4c').value=dataresults.Task_x0020_2_x0020_Q4C;
+document.getElementById('t2q4d').value=dataresults.Task_x0020_2_x0020_Q4D.slice(0,10);
+//document.getElementById('t2q5r').setAttribute("checked",dataresults.Task_x0020_2_x0020_Q5R=="on"?true:false);
+if(dataresults.Task_x0020_2_x0020_Q5R=== "on"){
+                                document.getElementById('Task_x0020_2_x0020_Q5R').checked = true;
+                                }
+document.getElementById('t2q5c').value=dataresults.Task_x0020_2_x0020_Q5C;
+document.getElementById('t2q5d').value=dataresults.Task_x0020_2_x0020_Q5D.slice(0,10);
+
+//document.getElementById('t3q1r').setAttribute("checked",dataresults.Task_x0020_3_x0020_Q1R=="on"?true:false);
+if(dataresults.Task_x0020_3_x0020_Q1R=== "on"){
+                                document.getElementById('Task_x0020_3_x0020_Q1R').checked = true;
+                                }
+document.getElementById('t3q1c').value=dataresults.Task_x0020_3_x0020_Q1C;
+document.getElementById('t3q1d').value=dataresults.Task_x0020_3_x0020_Q1D.slice(0,10);
+//document.getElementById('t3q2r').setAttribute("checked",dataresults.Task_x0020_3_x0020_Q2R=="on"?true:false);
+if(dataresults.Task_x0020_3_x0020_Q2R=== "on"){
+                                document.getElementById('Task_x0020_3_x0020_Q2R').checked = true;
+                                }
+document.getElementById('t3q2c').value=dataresults.Task_x0020_3_x0020_Q2C;
+document.getElementById('t3q2d').value=dataresults.Task_x0020_3_x0020_Q2D.slice(0,10);
+//document.getElementById('t3q3r').setAttribute("checked",dataresults.Task_x0020_3_x0020_Q3R=="on"?true:false);
+if(dataresults.Task_x0020_3_x0020_Q3R=== "on"){
+                                document.getElementById('Task_x0020_3_x0020_Q3R').checked = true;
+                                }
+document.getElementById('t3q3c').value=dataresults.Task_x0020_3_x0020_Q3C;
+document.getElementById('t3q3d').value=dataresults.Task_x0020_3_x0020_Q3D.slice(0,10);
+
+            },
+            error: function (xhr, status, error) {
+                console.log("Failed");
+            }
+        });
+}
+
+
+ <!-- GetListItem ByID Calling -->
+ 
+            if (buid==null){
+	   queryParam1 = getQueryString();
+             var FormID = queryParam1.FormID;
+            GetListItemById();
+			console.log(FormID);
+                       }
+
+
+<!-- Save/Post Form Functionality -->
+
+function saveform(e){
+e.preventDefault()
+   	var metadata = { 'type': 'SP.Data.0729ListItem' }
+   	var data1 = getformdata(metadata);
+   	console.log(data1);	
+	jQuery.ajax({
+        	url: _spPageContextInfo.webAbsoluteUrl  + "/_api/web/lists/GetByTitle('0729')/items?$select=Id",
+        	type: "POST",
+        	data: data1,
+        	headers: {
+            		"X-HTTP-Method":"POST",
+            		"accept": "application/json;odata=verbose",
+            		"content-type": "application/json;odata=verbose",
+            		"X-RequestDigest": $("#__REQUESTDIGEST").val(),
+            		"IF-MATCH": "*"
+        	},
+        	success: function(){console.log("success");
+            $('.modal').addClass('show').show().addClass("background")
+			},
+        	error: function(xhr, status, error){console.log(status);console.log(error); alert("error insert");}
+	});
+} 
+
+           <!-- Update/Edit Form Functionality -->
+		   
+                function updateform(e) {
+                e.preventDefault()
+                var metadata = { 'type': 'SP.Data.0729ListItem' }
+                var data1 = getformdata(metadata);
+                console.log(data1);
+                jQuery.ajax({
+                    url: _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getByTitle('0729')/items(" + FormID + ")",
+                    type: "POST",
+                    data: data1,
+                    headers: {
+                        "X-HTTP-Method": "PATCH",
+                        "accept": "application/json;odata=verbose",
+                        "content-type": "application/json;odata=verbose",
+                        "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                        "IF-MATCH": "*"
+                    },
+                    success: function () {
+                    console.log("success");
+                    $('.modal').addClass('show').show().addClass("background")
+ 
+                    },
+                    error: function (xhr, status, error) { console.log(status); console.log(error); alert("error insert"); }
+                });
+            }
+
+
+
+   <!-- Readonly Functionality -->
+			
+			if (mode == "View"){
+			$(".view").each(function(i,e){
+			$(e).attr("readonly",true)
+			})
+			$("input[type='checkbox']").each(function(i,e){
+			$(e).attr("disabled","disabled")
+			})
+			}
+			
+
+ <!-- Date Change Functionality -->
+		   
+            $(".date-1").change(function () {
+                var date = $(this).val()
+                $('.date').each(function () {
+                    $(this).val(date)
+                })
+            })
+			
+			
+ <!-- Save Form Calling -->
+ 
+			if(mode == "New"){
+			$("#request").click(function (e) {
+			saveform(e);
+            });
+            }
+			
+			
+  <!-- Update Form Calling -->
+		   
+		   if (mode == "Edit"){
+		   $("#request").click(function (e) {
+		   updateform(e);
+		   });
+           }
+		   
+  <!-- Copy Form Calling -->
+		   
+			if(mode == "Copy"){
+			$("#request").click(function (e) {
+			saveform(e);
+            });
+            }
+
+    <!-- New View Form Calling -->
+		   
+			if(mode == "NewView"){
+			$("#request").hide();
+            }		
+
+</script>
+ <script>$("#pageTitle").hide();</script>
+</body>
+</html>
